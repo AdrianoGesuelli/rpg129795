@@ -2,7 +2,7 @@ package it.unicam.cs.mpgc.rpg129795.Combat;
 
 import java.util.Random;
 
-public class StandardCombatRules //! implements CombatRules
+public class StandardCombatRules //TODO : //! implements CombatRules
 
     {
 
@@ -16,7 +16,7 @@ public class StandardCombatRules //! implements CombatRules
         return random.nextInt(100) + 1;   //? D100, da 1 a 100
     }
 
-    /* !
+    /*TODO
     public boolean checkHit(){
         int attackRoll = roll();
         int damageValue = getDamageValue();
@@ -29,7 +29,7 @@ public class StandardCombatRules //! implements CombatRules
     }
      */
 
-    /* !
+    /*TODO
     public boolean checkBaseDodge(int attackRoll){
         if (attackRoll <= getBaseDodgeValue()){
             return true;
@@ -43,12 +43,13 @@ public class StandardCombatRules //! implements CombatRules
         return false;
     }
 
+    //TODO
     public boolean getAffinityMultiplier(){
-        //TODO
+
         return true;
     }
 
-    /* !
+    /*TODO
     public int applyDefense(int damage){
 
         int finalDamage = damage - getBaseDefenceValue();
@@ -56,7 +57,7 @@ public class StandardCombatRules //! implements CombatRules
     }
      */
 
-    /* !
+    /*TODO
     public void resolveAttack(int finalDamage){
         int currentHP = getCurrentHP();
         int newHpValue = currentHP -  finalDamage;
