@@ -2,7 +2,9 @@ package it.unicam.cs.mpgc.rpg129795.Combat;
 
 import java.util.Random;
 
-public class StandardCombatRules {
+public class StandardCombatRules //! implements CombatRules
+
+    {
 
     private final Random random;
 

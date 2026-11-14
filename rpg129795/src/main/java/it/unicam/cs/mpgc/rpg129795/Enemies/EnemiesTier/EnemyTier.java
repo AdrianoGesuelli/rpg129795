@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg129795.Enemies.EnemiesTier;
 
-public enum EnemiesTier {
+public enum EnemyTier {
 
     TUTORIAL,
     FLOOR1,

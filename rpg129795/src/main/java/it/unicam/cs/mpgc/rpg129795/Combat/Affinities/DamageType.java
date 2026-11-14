@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg129795.Combat.Affinities;
 
-public enum DamageTypes {
+public enum DamageType {
 
     PHYSICAL,
     MAGIC,
