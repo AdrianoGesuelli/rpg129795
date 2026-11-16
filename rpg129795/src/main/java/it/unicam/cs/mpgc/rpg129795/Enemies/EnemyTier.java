@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg129795.Enemies.EnemiesTier;
+package it.unicam.cs.mpgc.rpg129795.Enemies;
 
 public enum EnemyTier {
 
