@@ -19,7 +19,7 @@ public enum Affinity {
     }
 
     public boolean isAbsorbing() {
-        return multiplier < 0;
+        return this ==  ABSORBS;
     }
 
 }
