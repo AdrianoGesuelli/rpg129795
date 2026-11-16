@@ -11,9 +11,9 @@ public class StartingWeapons {
     public static List<Weapon> all() {
         return List.of(
 
-                new WeaponsMold("twin_blades_id", "Twin Blades", 12, DamageType.PHYSICAL),
-                new WeaponsMold("greatsword_id", "Greatsword", 16, DamageType.PHYSICAL),
-                new WeaponsMold("dagger_id", "Dagger", 8, DamageType.PHYSICAL)
+                new WeaponTemplate("twin_blades_id", "Twin Blades", 12, DamageType.PHYSICAL),
+                new WeaponTemplate("greatsword_id", "Greatsword", 16, DamageType.PHYSICAL),
+                new WeaponTemplate("dagger_id", "Dagger", 8, DamageType.PHYSICAL)
 
         );
     }

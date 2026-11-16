@@ -1,7 +1,14 @@
 package it.unicam.cs.mpgc.rpg129795.Enemies;
 
-public interface Enemy {
+import it.unicam.cs.mpgc.rpg129795.Combat.Combatant;
 
-    //TODO
+import java.util.List;
+
+public interface Enemy extends Combatant {
+
+    String getId();
+    EnemyTier getTier();
+    EnemyAction chooseAction();
+    List<String> getObservationHints();
 
 }
