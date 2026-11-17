@@ -1,9 +1,9 @@
-package it.unicam.cs.mpgc.rpg129795.Enemies;
+package it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior;
 
 import java.util.List;
 import java.util.Random;
 
-public class WeightedActionsBehaviorRandomized implements EnemyBehavior{
+public class WeightedActionsBehaviorRandomized implements EnemyBehavior {
 
     private final Random random;
 

@@ -4,12 +4,14 @@ import it.unicam.cs.mpgc.rpg129795.Character.Stats;
 import it.unicam.cs.mpgc.rpg129795.Combat.AbstractCombatant;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.Affinity;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
+import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyAction;
+import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyBehavior;
 
 import java.util.List;
 
 public final class StandardEnemy extends AbstractCombatant implements Enemy {
 
-    private final EnemyBehavior  behavior;
+    private final EnemyBehavior behavior;
     private final EnemyTemplate template;
 
     public StandardEnemy (EnemyBehavior behavior, EnemyTemplate  template) {
