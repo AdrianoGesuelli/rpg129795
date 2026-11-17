@@ -44,11 +44,11 @@ public abstract class AbstractCombatant implements Combatant{
         }
     }
 
-    public Stance getCurrentStance(){
+    public Stance getStance(){
         return currentStance;
     }
 
-    public void setCurrentStance(Stance newStance){
+    public void setStance(Stance newStance){
         if (newStance == null){
             throw new IllegalArgumentException("Current Stance cannot be null");
         }

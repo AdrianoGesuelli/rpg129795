@@ -14,6 +14,6 @@ public interface Combatant {
     void heal(int amount);
     Affinity getAffinity(DamageType type);
     Stance getStance();
-    void setStance();
+    void setStance(Stance stance);
 
 }
