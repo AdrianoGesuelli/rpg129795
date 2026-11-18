@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg129795.Combat;
 import it.unicam.cs.mpgc.rpg129795.Character.Stats;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.Affinity;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
+import it.unicam.cs.mpgc.rpg129795.Combat.Status.ActiveEffects;
 
 public interface Combatant {
 
@@ -15,5 +16,6 @@ public interface Combatant {
     Affinity getAffinity(DamageType type);
     Stance getStance();
     void setStance(Stance stance);
+    ActiveEffects getActiveEffects();
 
 }

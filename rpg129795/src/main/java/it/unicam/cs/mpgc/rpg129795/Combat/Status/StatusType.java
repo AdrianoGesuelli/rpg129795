@@ -9,7 +9,7 @@ public enum StatusType {
     POISON(DamageType.POISON),
     NECROSIS(DamageType.NECROSIS);
 
-    private DamageType damageType;
+    private final DamageType damageType;
 
     StatusType(DamageType damageType) {
         this.damageType = damageType;
@@ -26,5 +26,4 @@ public enum StatusType {
         }
         return new NecrosisEffect();
     }
-
 }
