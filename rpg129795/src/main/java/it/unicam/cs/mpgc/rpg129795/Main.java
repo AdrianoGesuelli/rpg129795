@@ -27,12 +27,12 @@ public class Main {
         Random random = new Random();
 
         //? 1 - Classe e sottoclasse
-        CharacterClass choosenClass = choose(input, "Choose your class: ", ClassCatalog.classes());
-        Subclass choosenSubclass = choose(input, "Choose your subclass: ", ClassCatalog.subclassesOf(choosenClass));
+        CharacterClass choosenClass = choose(input, "Choose your class", ClassCatalog.classes());
+        Subclass choosenSubclass = choose(input, "Choose your subclass", ClassCatalog.subclassesOf(choosenClass));
         PlayerCharacter player = new CharacterBuilder().withClass(choosenClass).withSubclass(choosenSubclass).build();
 
         //? 2 - Entrata e guardiano
-        CastleEntrance entrance = choose(input, "Choose the entrance: ", CastleEntrance.all());
+        CastleEntrance entrance = choose(input, "Choose the entrance", CastleEntrance.all());
         System.out.println(entrance.description());
         Enemy enemy = new EnemiesFactory(random).create(entrance.guardian());
 
@@ -81,7 +81,7 @@ public class Main {
     //? Gestione delle scelte
     private static <T> T choose(Scanner input, String title, List<T> options) {
         System.out.println();
-        System.out.println(title + ":");
+        System.out.println(title + " : ");
 
         for (int i = 0; i < options.size(); i++) {
             System.out.println("  " + (i + 1) + ") " + describe(options.get(i)));
