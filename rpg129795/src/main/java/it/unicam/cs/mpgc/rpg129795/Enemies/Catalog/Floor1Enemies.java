@@ -24,13 +24,13 @@ public class Floor1Enemies {
     }
 
     public static EnemyTemplate cryptInsectoid() {
-        EnemyAction mandibles = new EnemyAction("mandibles", "Mandibles", 9, DamageType.PHYSICAL);
-        EnemyAction stinger = new EnemyAction("stinger",  "Stinger", 6, DamageType.PHYSICAL,
+        EnemyAction mandibles = new EnemyAction("mandibles_id", "Mandibles", 9, DamageType.PHYSICAL);
+        EnemyAction stinger = new EnemyAction("stinger_id",  "Stinger", 6, DamageType.PHYSICAL,
                 List.of(new StatusApplication(StatusType.POISON, 50)));
-        EnemyAction acidSpray = new EnemyAction("acid_spray", "Acid Spray", 3, DamageType.POISON,
+        EnemyAction acidSpray = new EnemyAction("acid_spray_id", "Acid Spray", 3, DamageType.POISON,
                 List.of(new StatusApplication(StatusType.POISON, 50)));
 
-        return new EnemyTemplate("crypt_insectoid", "Crypt Insectoid", EnemyTier.FLOOR_1,
+        return new EnemyTemplate("crypt_insectoid_id", "Crypt Insectoid", EnemyTier.FLOOR_1,
                 new Stats(40, 5, 20, 10),
                 new AffinityTable(Map.of(
                         DamageType.WIND, Affinity.WEAK,
@@ -46,11 +46,11 @@ public class Floor1Enemies {
     }
 
     public static EnemyTemplate lizardfolkBerserker() {
-        EnemyAction savageSlash = new EnemyAction("savage_slash", "Savage Slash", 12, DamageType.PHYSICAL);
-        EnemyAction bite = new EnemyAction("bite", "Bite", 8, DamageType.PHYSICAL);
-        EnemyAction blindFury = new EnemyAction("blind_fury", "Blind Fury", 20, DamageType.PHYSICAL);
+        EnemyAction savageSlash = new EnemyAction("savage_slash_id", "Savage Slash", 12, DamageType.PHYSICAL);
+        EnemyAction bite = new EnemyAction("bite_id", "Bite", 8, DamageType.PHYSICAL);
+        EnemyAction blindFury = new EnemyAction("blind_fury_id", "Blind Fury", 20, DamageType.PHYSICAL);
 
-        return new EnemyTemplate("lizardfolk_berserker", "Lizardfolk Berserker0", EnemyTier.FLOOR_1,
+        return new EnemyTemplate("lizardfolk_berserker_id", "Lizardfolk Berserker0", EnemyTier.FLOOR_1,
                 new Stats(55, 10, 5, 15),
                 new AffinityTable(Map.of(
                         DamageType.WATER, Affinity.WEAK,
@@ -68,12 +68,12 @@ public class Floor1Enemies {
     }
 
     public static EnemyTemplate darkMage() {
-        EnemyAction eldritchBlast = new EnemyAction("eldritch_blast", "Eldritch Blast", 11, DamageType.DARK);
-        EnemyAction rottingCurse = new EnemyAction("rotting_curse", "Rotting Curse", 5, DamageType.NECROSIS,
+        EnemyAction eldritchBlast = new EnemyAction("eldritch_blast_id", "Eldritch Blast", 11, DamageType.DARK);
+        EnemyAction rottingCurse = new EnemyAction("rotting_curse_id", "Rotting Curse", 5, DamageType.NECROSIS,
                 List.of(new StatusApplication(StatusType.NECROSIS, 80)));
-        EnemyAction darkLightning = new EnemyAction("dark_lightning", "Dark Lightning", 9, DamageType.DARK);
+        EnemyAction darkLightning = new EnemyAction("dark_lightning_id", "Dark Lightning", 9, DamageType.DARK);
 
-        return new EnemyTemplate("dark_mage", "Dark Mage", EnemyTier.FLOOR_1,
+        return new EnemyTemplate("dark_mage_id", "Dark Mage", EnemyTier.FLOOR_1,
                 new Stats(35, 0, 10, 10),
                 new AffinityTable(Map.of(
                         DamageType.HOLY, Affinity.WEAK,
@@ -90,13 +90,13 @@ public class Floor1Enemies {
     }
 
     public static EnemyTemplate fleshOoze() {
-        EnemyAction engulf = new EnemyAction("engulf", "Engulf", 8, DamageType.PHYSICAL);
-        EnemyAction putridSpray = new EnemyAction("putrid_spray", "Putrid Spray", 4, DamageType.NECROSIS,
+        EnemyAction engulf = new EnemyAction("engulf_id", "Engulf", 8, DamageType.PHYSICAL);
+        EnemyAction putridSpray = new EnemyAction("putrid_spray_id", "Putrid Spray", 4, DamageType.NECROSIS,
                 List.of(new StatusApplication(StatusType.NECROSIS, 80)));
-        EnemyAction boneStab = new EnemyAction("bone_stab",  "Bone Stab", 13, DamageType.PHYSICAL,
+        EnemyAction boneStab = new EnemyAction("bone_stab_id",  "Bone Stab", 13, DamageType.PHYSICAL,
                 List.of(new StatusApplication(StatusType.NECROSIS, 30)));
 
-        return new EnemyTemplate("flesh_ooze", "Flesh Ooze", EnemyTier.FLOOR_1,
+        return new EnemyTemplate("flesh_ooze_id", "Flesh Ooze", EnemyTier.FLOOR_1,
                 new Stats(65, 0, 0, 5),
                 new AffinityTable(Map.of(
                         DamageType.HOLY, Affinity.WEAK,

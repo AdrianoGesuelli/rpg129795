@@ -12,6 +12,13 @@ public record Stats(int maxHp, int defense, int evasion, int critChance) {
         }
     }
 
-    //TODO
+    //? Ottengo le statistiche con i modificatori applicati
+    public Stats with(StatsModifiers modifiers) {
+        return new Stats(
+                maxHp + modifiers.maxHp(),
+                defense + modifiers.defense(),
+                evasion + modifiers.evasion(),
+                critChance + modifiers.critChance());
+    }
 
 }

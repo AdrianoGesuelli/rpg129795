@@ -21,7 +21,7 @@ public class HitResolve {
             return HitResult.CRITICAL; //* perché il roll è > dei numeri non critici
         }
 
-        int evasion = target.getStance().getEvasionBonus(target.getStats().evasion()); //* l'evasione del target
+        int evasion = target.getStance().getAdjustesEvasion(target.getStats().evasion()); //* l'evasione del target
 
         if (roll <= evasion) {
             return HitResult.MISS;

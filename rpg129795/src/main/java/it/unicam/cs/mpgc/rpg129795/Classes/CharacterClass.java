@@ -6,8 +6,7 @@ public record CharacterClass(String id, String name, String description, Stats b
 
     public CharacterClass {
         if (id == null || name == null || description == null || baseStats == null || weaponId == null) {
-            throw new NullPointerException("Invalid data");
+            throw new NullPointerException("Invalid character class");
         }
     }
-
 }

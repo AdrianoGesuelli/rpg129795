@@ -21,7 +21,7 @@ public enum Stance {
         this.statusBlockChance = statusBlockChance;
     }
 
-    public int getEvasionBonus(int evasion) {
+    public int getAdjustesEvasion(int evasion) {
         if (removeEvasion) {
             return 0;
         }
