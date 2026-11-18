@@ -11,18 +11,19 @@ public class Floor1Enemies {
     private Floor1Enemies() {}
 
     /*
-
     public static List<EnemyTemplate> all() {
         return List.of(insectoid(), lizardfolkBerserker(), darkMage(), fleshOoze());
     }
 
     public EnemyTemplate insectoid() {
 
-        EnemyAction acidSpit = new EnemyAction("acid_spit", "Acid Spit", 3, DamageType.POISON);
-        EnemyAction bite = new EnemyAction("bite",  "Bite", 12, DamageType.PHYSICAL);
+        EnemyAction mandibles = new EnemyAction("mandibles", "Mandibles", 9, DamageType.PHYSICAL);
+        EnemyAction stinger = new EnemyAction("stinger",  "Stinger", 6, DamageType.PHYSICAL,
+                List.of(new StatusApplication(StatusType.POISON, 50)));
 
     }
-    
+
      */
+
 
 }
