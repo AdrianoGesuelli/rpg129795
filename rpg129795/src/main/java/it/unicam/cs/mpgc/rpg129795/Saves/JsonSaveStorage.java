@@ -43,4 +43,10 @@ public class JsonSaveStorage implements SaveStorage {
     public boolean exists() {
         return file.exists();
     }
+
+    public void delete() {
+        if (exists() && !file.delete()) {
+            throw new IllegalStateException("Could not delete the saved game");
+        }
+    }
 }

@@ -43,4 +43,8 @@ public final class SaveManager {
     public boolean hasSave() {
         return storage.exists();
     }
+
+    public void deleteSave() {
+        storage.delete();
+    }
 }

@@ -61,11 +61,13 @@ public class Main {
     //! Avvio della partita ---------------------
 
     private static GameProgress startOrContinue(Scanner input, SaveManager saveManager) {
-        if (saveManager.hasSave() && askYesNo(input, "A saved game was found. Do you want to continue it?")) {
-            GameProgress progress = saveManager.loadProgress();
-            PlayerCharacter player = progress.player();
-            System.out.println("Welcome back, " + player.getName() + ". HP: " + player.getCurrentHp() + "/" + player.getStats().maxHp());
-            return progress;
+        while (saveManager.hasSave()) {
+            if (askYesNo(input, "A saved game was found. Do you want to continue it?")) {
+                return continueGame(saveManager);
+            }
+            if (askYesNo(input, "Starting a new game will delete your saved game. Are you sure?")) {
+                saveManager.deleteSave();
+            }
         }
         return startNewGame(input);
     }
@@ -74,16 +76,19 @@ public class Main {
         String playerName = askName(input);
         CharacterClass chosenClass = choose(input, "Choose your class", ClassCatalog.classes());
         Subclass chosenSubclass = choose(input, "Choose your subclass", ClassCatalog.subclassesOf(chosenClass));
-        PlayerCharacter player = new CharacterBuilder()
-                .withName(playerName)
-                .withClass(chosenClass)
-                .withSubclass(chosenSubclass)
-                .build();
-
+        PlayerCharacter player = new CharacterBuilder().withName(playerName).withClass(chosenClass).withSubclass(chosenSubclass).build();
         CastleEntrance entrance = choose(input, "Choose the entrance", CastleEntrance.all());
         System.out.println(entrance.description());
 
         return new GameProgress(player, entrance, entranceFloor);
+    }
+
+    private static GameProgress continueGame(SaveManager saveManager) {
+        GameProgress progress = saveManager.loadProgress();
+        PlayerCharacter player = progress.player();
+        System.out.println("Welcome back, " + player.getName() + ". HP: " + player.getCurrentHp() + "/" + player.getStats().maxHp());
+
+        return progress;
     }
 
     //! Piani e nemici ---------------------

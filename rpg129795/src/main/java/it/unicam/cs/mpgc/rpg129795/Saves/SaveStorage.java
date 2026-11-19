@@ -8,4 +8,6 @@ public interface SaveStorage {
 
     boolean exists();
 
+    void delete();
+
 }
