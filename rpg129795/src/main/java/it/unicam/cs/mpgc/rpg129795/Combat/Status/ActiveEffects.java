@@ -49,4 +49,9 @@ public class ActiveEffects {
         return List.copyOf(active);
     }
 
+    //? rimuove tutti gli effetti di stato (fine combat)
+    public void clear() {
+        active.clear();
+    }
+
 }

@@ -9,8 +9,11 @@ import it.unicam.cs.mpgc.rpg129795.Classes.Subclass;
 import it.unicam.cs.mpgc.rpg129795.Combat.*;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.*;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusEffect;
-import it.unicam.cs.mpgc.rpg129795.Enemies.EnemiesFactory;
-import it.unicam.cs.mpgc.rpg129795.Enemies.Enemy;
+import it.unicam.cs.mpgc.rpg129795.Enemies.*;
+import it.unicam.cs.mpgc.rpg129795.Saves.JsonSaveStorage;
+import it.unicam.cs.mpgc.rpg129795.Saves.SaveData;
+import it.unicam.cs.mpgc.rpg129795.Saves.SaveManager;
+import it.unicam.cs.mpgc.rpg129795.Saves.SaveStorage;
 
 import java.util.List;
 import java.util.Random;
@@ -36,41 +39,43 @@ public class Main {
 
         //? 3 - Combattimento
         AttackResolve attackResolve = new AttackResolve(new HitResolve(random), random);
-        CombatSession combat = new CombatSession(player, enemy, attackResolve);
-
-        while (combat.getOutcome() == CombatOutcome.ONGOING) {
-            printStatus(player, enemy);
-
-            CombatActions action = choose(input, "Your turn", player.getActions());
-            ActionResult playerResult = combat.playerTurn(action);
-
-            if (playerResult != null) {
-                if (playerResult.isAttack()) {
-                    System.out.println("You use " + playerResult.actionName() + ". "
-                            + describeAttack(player.getName(), enemy.getName(), playerResult.attackResult()));
-                } else {
-                    System.out.println("You use " + playerResult.actionName() + ".");
-                }
-            }
-
-            if (combat.getOutcome() != CombatOutcome.ONGOING) {
-                break;
-            }
-
-            EnemyTurnResult enemyTurn = combat.enemyTurn();
-
-            if (enemyTurn != null) {
-                System.out.println(enemy.getName() + " uses " + enemyTurn.action().name() + ". "
-                        + describeAttack(enemy.getName(), player.getName(), enemyTurn.result()));
-            }
-        }
-
-        if (combat.getOutcome() == CombatOutcome.VICTORY) {
-            System.out.println("You win! How fortuitous...");
-        } else {
+        if (fight(input, player, enemy, attackResolve) == CombatOutcome.DEFEAT) {
             System.out.println("You lost! Pure skill issues! :D");
+            return;
         }
+        System.out.println("You win! How fortuitous...");
+
+        //? 4 - salvataggio
+        SaveManager saveManager = new SaveManager(JsonSaveStorage.inUserHome());
+        offerSave(input, saveManager, player, entrance, 1);
+
+        //? 5 - Piano 1: nemico casuale
+        System.out.println();
+        System.out.println("=== FLOOR 1 ===");
+        EnemyTemplate floorTemplate = new RandomEnemySelector(random).select(EnemyTier.FLOOR_1);
+        Enemy floorEnemy = new EnemiesFactory(random).create(floorTemplate);
+        System.out.println("A " + floorEnemy.getName() + " blocks your way.");
+
+        if (fight(input, player, floorEnemy, attackResolve) == CombatOutcome.DEFEAT) {
+            System.out.println("You lost! Just as I thought.");
+            return;
+        }
+        System.out.println("You won again? How nice...");
+
+
+
+        //? 6 - Fine della demo
+        System.out.println();
+        System.out.println("=====================================================");
+        System.out.println(" WORK IN PROGRESS");
+        System.out.println(" The rest of the castle is still being built.");
+        System.out.println(" Thank you for playing!");
+        System.out.println("=====================================================");
     }
+
+
+
+    //! Metodi di appoggio ---------------------
 
     private static String askName(Scanner input) {
         System.out.println();
@@ -106,6 +111,67 @@ public class Main {
             }
 
             System.out.println("Invalid choice, try again.");
+        }
+    }
+
+    private static CombatOutcome fight(Scanner input, PlayerCharacter player, Enemy enemy, AttackResolve attackResolve) {
+        CombatSession combat = new CombatSession(player, enemy, attackResolve);
+
+        while (combat.getOutcome() == CombatOutcome.ONGOING) {
+            printStatus(player, enemy);
+
+            //? Turno del giocatore
+            CombatActions action = choose(input, "Your turn", player.getActions());
+            ActionResult playerResult = combat.playerTurn(action);
+
+            if (playerResult != null) {
+                if (playerResult.isAttack()) {
+                    System.out.println("You use " + playerResult.actionName() + ". "
+                            + describeAttack(player.getName(), enemy.getName(), playerResult.attackResult()));
+                } else {
+                    System.out.println("You use " + playerResult.actionName() + ".");
+                }
+            }
+
+            if (combat.getOutcome() != CombatOutcome.ONGOING) {
+                break;
+            }
+
+            //? Turno del nemico
+            EnemyTurnResult enemyTurn = combat.enemyTurn();
+            if (enemyTurn != null) {
+                System.out.println(enemy.getName() + " uses " + enemyTurn.action().name() + ". "
+                        + describeAttack(enemy.getName(), player.getName(), enemyTurn.result()));
+            }
+        }
+
+        player.getActiveEffects().clear();
+        return combat.getOutcome();
+    }
+
+    //? Chiede se salvare e, in caso, salva
+    private static void offerSave(Scanner input, SaveManager saveManager,
+                                  PlayerCharacter player, CastleEntrance entrance, int nextFloor) {
+        if (askYesNo(input, "Do you want to save your progress?")) {
+            saveManager.saveProgress(player, entrance, nextFloor);
+            System.out.println("Game saved.");
+        }
+    }
+
+    //? Domanda sì/no: accetta y/yes oppure n/no
+    private static boolean askYesNo(Scanner input, String question) {
+        System.out.println();
+        System.out.println(question + " (y/n)");
+        while (true) {
+            System.out.print("> ");
+            String line = input.nextLine().trim().toLowerCase();
+            if (line.equals("y") || line.equals("yes")) {
+                return true;
+            }
+            if (line.equals("n") || line.equals("no")) {
+                return false;
+            }
+            System.out.println("Please answer y or n.");
         }
     }
 
