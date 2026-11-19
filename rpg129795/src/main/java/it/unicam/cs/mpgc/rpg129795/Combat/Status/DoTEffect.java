@@ -38,4 +38,8 @@ public abstract class DoTEffect implements StatusEffect {
         return remainingTurns <= 0;
     }
 
+    public int remainingTurns() {
+        return remainingTurns;
+    }
+
 }

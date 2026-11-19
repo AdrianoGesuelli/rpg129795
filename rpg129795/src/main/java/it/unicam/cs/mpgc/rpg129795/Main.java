@@ -6,12 +6,9 @@ import it.unicam.cs.mpgc.rpg129795.Character.PlayerCharacter;
 import it.unicam.cs.mpgc.rpg129795.Classes.CharacterClass;
 import it.unicam.cs.mpgc.rpg129795.Classes.ClassCatalog;
 import it.unicam.cs.mpgc.rpg129795.Classes.Subclass;
-import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
-import it.unicam.cs.mpgc.rpg129795.Combat.CombatOutcome;
-import it.unicam.cs.mpgc.rpg129795.Combat.CombatSession;
-import it.unicam.cs.mpgc.rpg129795.Combat.EnemyTurnResult;
-import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResolve;
-import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.HitResolve;
+import it.unicam.cs.mpgc.rpg129795.Combat.*;
+import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.*;
+import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusEffect;
 import it.unicam.cs.mpgc.rpg129795.Enemies.EnemiesFactory;
 import it.unicam.cs.mpgc.rpg129795.Enemies.Enemy;
 
@@ -27,10 +24,10 @@ public class Main {
         Random random = new Random();
 
         //? 1 - Classe e sottoclasse
-        String playerNsme = askName(input);
+        String playerName = askName(input);
         CharacterClass choosenClass = choose(input, "Choose your class", ClassCatalog.classes());
         Subclass choosenSubclass = choose(input, "Choose your subclass", ClassCatalog.subclassesOf(choosenClass));
-        PlayerCharacter player = new CharacterBuilder().withClass(choosenClass).withSubclass(choosenSubclass).build();
+        PlayerCharacter player = new CharacterBuilder().withName(playerName).withClass(choosenClass).withSubclass(choosenSubclass).build();
 
         //? 2 - Entrata e guardiano
         CastleEntrance entrance = choose(input, "Choose the entrance", CastleEntrance.all());
@@ -45,29 +42,31 @@ public class Main {
             printStatus(player, enemy);
 
             CombatActions action = choose(input, "Your turn", player.getActions());
-            int enemyHpBefore = enemy.getCurrentHp();
-            combat.playerTurn(action);
+            ActionResult playerResult = combat.playerTurn(action);
 
-            System.out.println("Your choise: " + action.getName() + ". Seems like the " + enemy.getName() + " loses " +
-                    (enemyHpBefore + enemy.getCurrentHp()) + " HP.");
-
+            if (playerResult != null) {
+                if (playerResult.isAttack()) {
+                    System.out.println("You use " + playerResult.actionName() + ". "
+                            + describeAttack(player.getName(), enemy.getName(), playerResult.attackResult()));
+                } else {
+                    System.out.println("You use " + playerResult.actionName() + ".");
+                }
+            }
 
             if (combat.getOutcome() != CombatOutcome.ONGOING) {
                 break;
             }
 
-            int playerHpBefore = player.getCurrentHp();
             EnemyTurnResult enemyTurn = combat.enemyTurn();
 
             if (enemyTurn != null) {
-                System.out.println("Seems like the " + enemy.getName() + " is using " + enemyTurn.action().name() + "." +
-                        "(" + enemyTurn.result().result() + "). Oh my, you lose " +
-                        (playerHpBefore - player.getCurrentHp()) + "HP.");
+                System.out.println(enemy.getName() + " uses " + enemyTurn.action().name() + ". "
+                        + describeAttack(enemy.getName(), player.getName(), enemyTurn.result()));
             }
         }
 
         if (combat.getOutcome() == CombatOutcome.VICTORY) {
-            System.out.println("You win! How fortuitous");
+            System.out.println("You win! How fortuitous...");
         } else {
             System.out.println("You lost! Pure skill issues! :D");
         }
@@ -84,12 +83,6 @@ public class Main {
             }
             System.out.println("Your name shall be between 1 and 20 characters.");
         }
-    }
-
-    private static void printStatus(PlayerCharacter player, Enemy enemy) {
-        System.out.println();
-        System.out.println(player.getName() + " HP: " + player.getCurrentHp() + "/" + player.getStats().maxHp()
-                + "   |   " + enemy.getName() + " HP: " + enemy.getCurrentHp() + "/" + enemy.getStats().maxHp());
     }
 
     //? Gestione delle scelte
@@ -142,6 +135,51 @@ public class Main {
             return action.getName();
         }
         return option.toString();
+    }
+
+    private static String describeAttack(String attacker, String target, AttackResult attack) {
+        if (attack.result() == HitResult.MISS) {
+            return target + " dodges the attack!";
+        }
+
+        String critical = "";
+
+        if (attack.result() == HitResult.CRITICAL) {
+            critical = " Critical hit!";
+        }
+
+        if (attack.heal() > 0) {
+            return target + " absorbs the blow and heals " + attack.heal() + " HP!" + critical;
+        }
+
+        return attacker + " deals " + attack.damage() + " damage to " + target + "." + critical;
+    }
+
+    private static void printStatus(PlayerCharacter player, Enemy enemy) {
+        System.out.println();
+        System.out.println(player.getName() + " HP: " + player.getCurrentHp() + "/" + player.getStats().maxHp()
+                + describeStatuses(player)
+                + "   |   " + enemy.getName() + " HP: " + enemy.getCurrentHp() + "/" + enemy.getStats().maxHp()
+                + describeStatuses(enemy));
+    }
+
+    private static String describeStatuses(Combatant combatant) {
+        List<StatusEffect> effects = combatant.getActiveEffects().getActive();
+        if (effects.isEmpty()) {
+            return "";
+        }
+        String text = " [";
+        for (int i = 0; i < effects.size(); i++) {
+            StatusEffect effect = effects.get(i);
+            if (i > 0) {
+                text += ", ";
+            }
+            text += effect.getStatusType() + " " + effect.remainingTurns() + " turns";
+            if (effect.getStacks() > 1) {
+                text += ", x" + effect.getStacks();
+            }
+        }
+        return text + "]";
     }
 
 }

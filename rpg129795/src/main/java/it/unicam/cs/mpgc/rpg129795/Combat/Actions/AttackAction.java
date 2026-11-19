@@ -3,6 +3,8 @@ package it.unicam.cs.mpgc.rpg129795.Combat.Actions;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatContext;
+import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.ActionResult;
+import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResult;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusApplication;
 
 import java.util.List;
@@ -29,8 +31,9 @@ public final class AttackAction implements CombatActions {
         return name;
     }
 
-    public void execute(CombatContext context) {
-        context.attackResolve().resolve(context.source(), context.target(), damage, damageType, statuses);
+    public ActionResult execute(CombatContext context) {
+        AttackResult result = context.attackResolve().resolve(context.source(), context.target(), damage, damageType, statuses);
+        return new ActionResult(name, result);
     }
 
 }

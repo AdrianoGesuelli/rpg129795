@@ -4,7 +4,7 @@ import it.unicam.cs.mpgc.rpg129795.Combat.Combatant;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.DoTEffect;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusType;
 
-public class PoisonEffect extends DoTEffect {
+public final class PoisonEffect extends DoTEffect {
 
     private static final int duration = 3;
     private static final int damagePerStack = 2;

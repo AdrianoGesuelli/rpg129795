@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg129795.Combat;
 
 import it.unicam.cs.mpgc.rpg129795.Character.PlayerCharacter;
+import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.ActionResult;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResolve;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResult;
 import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyAction;
@@ -23,15 +24,16 @@ public final class CombatSession {
     }
 
     //? Turno del giocatore:
-    public void playerTurn(CombatActions action) {
+    public ActionResult playerTurn(CombatActions action) {
         startTurn(player);
 
         if (!player.isAlive()) {
-            return;
+            return null;
         }
 
-        action.execute(new CombatContext(player, enemy, attackResolve));
+        ActionResult result = action.execute(new CombatContext(player, enemy, attackResolve));
         endTurn(player);
+        return result;
     }
 
     //? Turno del nemico:

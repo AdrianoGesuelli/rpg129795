@@ -9,5 +9,10 @@ public interface StatusEffect {
     default void onTurnEnd(Combatant statusOwner) {};
     void reapply();
     boolean hasEnded();
+    int remainingTurns();
+
+    default int getStacks() {
+        return 1;
+    }
 
 }
