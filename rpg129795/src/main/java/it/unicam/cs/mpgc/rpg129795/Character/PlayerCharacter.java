@@ -16,13 +16,15 @@ import java.util.List;
 
 public class PlayerCharacter extends AbstractCombatant {
 
+    private final String name;
     private final CharacterClass characterClass;
     private final Subclass subclass;
     private final Weapon weapon;
     private final List<CombatActions> actions;
 
-    PlayerCharacter(CharacterClass characterClass, Subclass subclass, Weapon weapon) {
+    PlayerCharacter(String name, CharacterClass characterClass, Subclass subclass, Weapon weapon) {
         super(characterClass.baseStats().with(subclass.modifiers()).maxHp());
+        this.name = name;
         this.characterClass = characterClass;
         this.subclass = subclass;
         this.weapon = weapon;
@@ -39,7 +41,7 @@ public class PlayerCharacter extends AbstractCombatant {
     }
 
     public String getName() {
-        return characterClass.name();
+        return name;
     }
 
     public Stats getStats() {

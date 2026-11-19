@@ -27,6 +27,7 @@ public class Main {
         Random random = new Random();
 
         //? 1 - Classe e sottoclasse
+        String playerNsme = askName(input);
         CharacterClass choosenClass = choose(input, "Choose your class", ClassCatalog.classes());
         Subclass choosenSubclass = choose(input, "Choose your subclass", ClassCatalog.subclassesOf(choosenClass));
         PlayerCharacter player = new CharacterBuilder().withClass(choosenClass).withSubclass(choosenSubclass).build();
@@ -69,6 +70,19 @@ public class Main {
             System.out.println("You win! How fortuitous");
         } else {
             System.out.println("You lost! Pure skill issues! :D");
+        }
+    }
+
+    private static String askName(Scanner input) {
+        System.out.println();
+        System.out.println("So, what is your name?");
+        while (true) {
+            System.out.print("> ");
+            String line = input.nextLine().trim();
+            if (!line.isEmpty() && line.length() <= 20) {
+                return line;
+            }
+            System.out.println("Your name shall be between 1 and 20 characters.");
         }
     }
 
