@@ -50,7 +50,7 @@ public class Floor1Enemies {
         EnemyAction bite = new EnemyAction("bite_id", "Bite", 8, DamageType.PHYSICAL);
         EnemyAction blindFury = new EnemyAction("blind_fury_id", "Blind Fury", 20, DamageType.PHYSICAL);
 
-        return new EnemyTemplate("lizardfolk_berserker_id", "Lizardfolk Berserker0", EnemyTier.FLOOR_1,
+        return new EnemyTemplate("lizardfolk_berserker_id", "Lizardfolk Berserker", EnemyTier.FLOOR_1,
                 new Stats(55, 10, 5, 15),
                 new AffinityTable(Map.of(
                         DamageType.WATER, Affinity.WEAK,
