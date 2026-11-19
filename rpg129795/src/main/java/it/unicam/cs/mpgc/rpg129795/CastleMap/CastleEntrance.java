@@ -29,4 +29,14 @@ public record CastleEntrance(String id, String name, String description, EnemyTe
                         "Black water flows out from under the castle. Someone is singing down there.",
                         EntryEnemies.siren()));
     }
+
+    public static CastleEntrance byId(String id) {
+        List<CastleEntrance> entrances = all();
+        for (int i = 0; i < entrances.size(); i++) {
+            if (entrances.get(i).id().equals(id)) {
+                return entrances.get(i);
+            }
+        }
+        throw new IllegalArgumentException("Unknown entrance id: " + id);
+    }
 }

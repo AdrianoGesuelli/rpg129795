@@ -67,9 +67,9 @@ public abstract class AbstractCombatant implements Combatant{
     //!----------------------------------------------------
 
     //? Usato solo per ripristinare eventuali salvataggi
-    public void restoreHp(int hp){
-        if (hp <= 0 || hp > getStats().maxHp()){
-            throw new IllegalArgumentException("HP value error");
+    public void setCurrentHp(int hp) {
+        if (hp <= 0 || hp > getStats().maxHp()) {
+            throw new IllegalArgumentException("HP must be between 1 and " + getStats().maxHp());
         }
         currentHp = hp;
     }

@@ -49,4 +49,26 @@ public final class ClassCatalog {
         return List.copyOf(result);
     }
 
+    public static CharacterClass classById(String id) {
+        List<CharacterClass> all = classes();
+
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).id().equals(id)) {
+                return all.get(i);
+            }
+        }
+        throw new IllegalArgumentException("Unknown class id: " + id);
+    }
+
+    public static Subclass subclassById(CharacterClass characterClass, String id) {
+        List<Subclass> subclasses = subclassesOf(characterClass);
+
+        for (int i = 0; i < subclasses.size(); i++) {
+            if (subclasses.get(i).id().equals(id)) {
+                return subclasses.get(i);
+            }
+        }
+        throw new IllegalArgumentException("Unknown subclass id: " + id);
+    }
+
 }
