@@ -1,6 +1,9 @@
 plugins {
     id("java")
     kotlin("jvm")
+
+    application
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 group = "it.unicam.cs.mpgc.rpg129795"
@@ -23,4 +26,13 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(25)
+}
+
+javafx {
+    version = "24.0.1"
+    modules = listOf("javafx.controls", "javafx.fxml")
+}
+
+application {
+    mainClass = "it.unicam.cs.mpgc.rpg129795.Gui.RpgApplication"
 }
