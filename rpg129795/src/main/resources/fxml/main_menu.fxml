@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.MainMenuController"
+      alignment="CENTER" spacing="16">
+
+    <Label text="The Demon King's Castle" style="-fx-font-size: 32px;"/>
+    <Button text="New Game" onAction="#onNewGame" prefWidth="200"/>
+    <Button fx:id="continueButton" text="Continue" onAction="#onContinue" prefWidth="200"/>
+    <Button text="Quit" onAction="#onQuit" prefWidth="200"/>
+</VBox>

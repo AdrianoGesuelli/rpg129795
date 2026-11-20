@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.CharacterCreationController"
+      alignment="CENTER" spacing="16">
+
+    <Label text="Character creation (work in progress)" style="-fx-font-size: 24px;"/>
+    <Button text="Back" onAction="#onBack" prefWidth="200"/>
+</VBox>
