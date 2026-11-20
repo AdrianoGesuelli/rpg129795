@@ -20,9 +20,9 @@ public final class ClassCatalog {
     public static List<CharacterClass> classes() {
         return List.of(
                 new CharacterClass(banditId, "Bandit", "Quick and elusive.",
-                        new Stats(100, 10, 10, 10), StartingWeapons.twin_blades_id),
+                        new Stats(85, 5, 15, 20), StartingWeapons.twin_blades_id),
                 new CharacterClass(paladinId, "Paladin", "Sturdy and powerful.",
-                        new Stats(120, 25, 5, 10), StartingWeapons.greatsword_id));
+                        new Stats(90, 20, 5, 5), StartingWeapons.greatsword_id));
     }
 
     public static List<Subclass> subclasses() {
@@ -31,8 +31,8 @@ public final class ClassCatalog {
                         banditId, StatsModifiers.none(), new PoisonDaggersAbility()),
                 new Subclass("light_boots", "Light Boots", "+10% evasion.",
                         banditId, new StatsModifiers(0, 0, 10, 0), new NoAbility()),
-                new Subclass("heavy_armor", "Heavy Armor", "+15% Defense, -5% evasion.",
-                        paladinId, new StatsModifiers(0, 15, -5, 0), new NoAbility()),
+                new Subclass("heavy_armor", "Heavy Armor", "+10% Defense, -5% evasion.",
+                        paladinId, new StatsModifiers(0, 10, -5, 0), new NoAbility()),
                 new Subclass("holy_sword", "Holy Sword", "Your sword can deal holy damage.",
                         paladinId, StatsModifiers.none(), new HolySwordAbility()));
     }

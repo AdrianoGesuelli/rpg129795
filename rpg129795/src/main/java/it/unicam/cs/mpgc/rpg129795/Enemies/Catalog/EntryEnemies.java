@@ -23,12 +23,12 @@ public class EntryEnemies {
     }
 
     public static EnemyTemplate gargoyle() {
-        EnemyAction stoneClaw = new EnemyAction("stone_claw_id", "Stone Claw", 7, DamageType.PHYSICAL);
-        EnemyAction divingStrike = new EnemyAction("diving_strike_id", "Diving Strike", 11, DamageType.PHYSICAL);
-        EnemyAction bodyStomp = new EnemyAction("body_stomp_id",  "Body Stomp", 9, DamageType.PHYSICAL);
+        EnemyAction stoneClaw = new EnemyAction("stone_claw_id", "Stone Claw", 9, DamageType.PHYSICAL);
+        EnemyAction divingStrike = new EnemyAction("diving_strike_id", "Diving Strike", 13, DamageType.PHYSICAL);
+        EnemyAction bodyStomp = new EnemyAction("body_stomp_id",  "Body Stomp", 11, DamageType.PHYSICAL);
 
         return new EnemyTemplate("gargoyle_id", "Gargoyle", EnemyTier.ENTRY,
-                new Stats(35, 25, 5, 5),
+                new Stats(36, 10, 5, 5),
                 new AffinityTable(Map.of(
                         DamageType.EARTH, Affinity.WEAK,
                         DamageType.MAGIC,  Affinity.WEAK,
@@ -46,13 +46,13 @@ public class EntryEnemies {
     }
 
     public static EnemyTemplate giantSkeleton() {
-        EnemyAction boneClub = new EnemyAction("bone_club_id", "Bone Club", 11, DamageType.PHYSICAL);
-        EnemyAction crushingStomp = new EnemyAction("crushing_stomp_id", "Crushing Stomp", 8, DamageType.PHYSICAL);
-        EnemyAction coldBreath = new EnemyAction("cold_breath_id",  "Cold Breath", 6, DamageType.WIND,
-                List.of(new StatusApplication(StatusType.NECROSIS, 10)));
+        EnemyAction boneClub = new EnemyAction("bone_club_id", "Bone Club", 15, DamageType.PHYSICAL);
+        EnemyAction crushingStomp = new EnemyAction("crushing_stomp_id", "Crushing Stomp", 12, DamageType.PHYSICAL);
+        EnemyAction coldBreath = new EnemyAction("cold_breath_id",  "Cold Breath", 8, DamageType.WIND,
+                List.of(new StatusApplication(StatusType.NECROSIS, 30)));
 
         return new EnemyTemplate("giant_skeleton_id", "Giant Skeleton", EnemyTier.ENTRY,
-                new Stats(40, 10, 10, 10),
+                new Stats(70, 20, 10, 10),
                 new AffinityTable(Map.of(
                         DamageType.HOLY, Affinity.WEAK,
                         DamageType.EARTH,  Affinity.WEAK,
@@ -70,12 +70,12 @@ public class EntryEnemies {
     }
 
     public static EnemyTemplate siren() {
-        EnemyAction tentacleSwing = new EnemyAction("tentacle_swing_id", "Tentacle Swing", 7, DamageType.PHYSICAL);
-        EnemyAction sirenSong = new EnemyAction("siren_song_id", "Siren Song", 9, DamageType.MAGIC);
-        EnemyAction bigWave = new EnemyAction("big_wave_id",  "Big Wave", 10, DamageType.WATER);
+        EnemyAction tentacleSwing = new EnemyAction("tentacle_swing_id", "Tentacle Swing", 10, DamageType.PHYSICAL);
+        EnemyAction sirenSong = new EnemyAction("siren_song_id", "Siren Song", 12, DamageType.MAGIC);
+        EnemyAction bigWave = new EnemyAction("big_wave_id",  "Big Wave", 14, DamageType.WATER);
 
         return new EnemyTemplate("siren_id", "Siren", EnemyTier.ENTRY,
-                new Stats(25, 0, 20, 5),
+                new Stats(40, 0, 25, 5),
                 new AffinityTable(Map.of(
                         DamageType.EARTH, Affinity.WEAK,
                         DamageType.WATER, Affinity.ABSORBS,

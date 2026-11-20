@@ -10,8 +10,12 @@ import java.util.List;
 
 public class PoisonDaggersAbility implements SubclassWeaponAbility{
 
+    private static final int poisonDamagePercent = 85;
+
     public List<CombatActions> createExtraActions (Weapon weapon) {
-        return List.of(new AttackAction("Poisoned Attack", weapon.damage(), weapon.damageType(),
+        int damage = weapon.damage() * poisonDamagePercent / 100;
+
+        return List.of(new AttackAction("Poisoned Attack", damage, weapon.damageType(),
                 List.of(new StatusApplication(StatusType.POISON, 100))));
     }
 }

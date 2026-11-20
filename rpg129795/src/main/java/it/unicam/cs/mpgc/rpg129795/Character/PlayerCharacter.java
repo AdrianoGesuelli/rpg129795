@@ -67,4 +67,27 @@ public class PlayerCharacter extends AbstractCombatant {
     public Weapon getWeapon() {
         return weapon;
     }
+
+    public List<CombatActions> getReadyActions() {
+        List<CombatActions> ready = new ArrayList<>();
+
+        for (int i = 0; i < actions.size(); i++) {
+            if (actions.get(i).isReady()) {
+                ready.add(actions.get(i));
+            }
+        }
+        return List.copyOf(ready);
+    }
+
+    public void tickCooldowns() {
+        for (int i = 0; i < actions.size(); i++) {
+            actions.get(i).onTurnStart();
+        }
+    }
+
+    public void resetCooldowns() {
+        for (int i = 0; i < actions.size(); i++) {
+            actions.get(i).resetCooldown();
+        }
+    }
 }

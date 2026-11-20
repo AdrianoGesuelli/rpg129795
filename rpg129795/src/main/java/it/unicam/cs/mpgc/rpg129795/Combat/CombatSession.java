@@ -25,7 +25,12 @@ public final class CombatSession {
 
     //? Turno del giocatore:
     public ActionResult playerTurn(CombatActions action) {
+        if (!action.isReady()) {
+            throw new IllegalArgumentException(action.getName() + " is still recharging");
+        }
+
         startTurn(player);
+        player.tickCooldowns();
 
         if (!player.isAlive()) {
             return null;

@@ -127,9 +127,10 @@ public class Main {
 
         while (combat.getOutcome() == CombatOutcome.ONGOING) {
             printStatus(player, enemy);
+            printCooldowns(player);
 
             //? Turno del giocatore
-            CombatActions action = choose(input, "Your turn", player.getActions());
+            CombatActions action = choose(input, "Your turn", player.getReadyActions());
             ActionResult playerResult = combat.playerTurn(action);
 
             if (playerResult != null) {
@@ -154,6 +155,7 @@ public class Main {
         }
 
         player.getActiveEffects().clear();
+        player.resetCooldowns();
         return combat.getOutcome();
     }
 
@@ -274,6 +276,20 @@ public class Main {
                 + describeStatuses(player)
                 + "   |   " + enemy.getName() + " HP: " + enemy.getCurrentHp() + "/" + enemy.getStats().maxHp()
                 + describeStatuses(enemy));
+    }
+
+    private static void printCooldowns(PlayerCharacter player) {
+        List<CombatActions> actions = player.getActions();
+        for (int i = 0; i < actions.size(); i++) {
+            CombatActions action = actions.get(i);
+            if (!action.isReady()) {
+                String turns = " turns";
+                if (action.getCooldownLeft() == 1) {
+                    turns = " turn";
+                }
+                System.out.println("Recharging: " + action.getName() + " (" + action.getCooldownLeft() + turns + ")");
+            }
+        }
     }
 
     //? Gli status attivi, con turni rimanenti e stack (es. " [POISON 3 turns, x2]")
