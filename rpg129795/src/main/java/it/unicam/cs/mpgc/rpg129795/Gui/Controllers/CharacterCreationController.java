@@ -103,8 +103,7 @@ public final class CharacterCreationController {
 
         gameFlow.startNewGame(name, classes.get(classIndex), subclasses.get(subclassIndex), entrances.get(entranceIndex));
 
-        //TODO: andare alla schermata di combattimento (fase 4)
-        errorLabel.setText(name + " is ready to enter: " + gameFlow.getEntrance().name() + ".");
+        navigator.goTo(Screen.combat);
     }
 
     @FXML

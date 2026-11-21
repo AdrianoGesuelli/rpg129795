@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg129795.Gui;
 
 import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.CharacterCreationController;
+import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.CombatController;
 import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.ControllerFactory;
 import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.MainMenuController;
 import it.unicam.cs.mpgc.rpg129795.Gui.Navigation.Navigator;
@@ -15,6 +16,7 @@ public class RpgApplication extends Application {
 
     private static final int windowWidth = 960;
     private static final int windowHeight = 640;
+    public static final String styleSheet = "/css/style.css";
 
     public void start(Stage stage) {
         GameServices services = GameServices.createDefault();
@@ -27,11 +29,15 @@ public class RpgApplication extends Application {
                 () -> new MainMenuController(navigator, services));
         controllerFactory.register(CharacterCreationController.class,
                 () -> new CharacterCreationController(navigator, services.gameFlow()));
+        controllerFactory.register(CombatController.class,
+                () -> new CombatController(navigator, services.gameFlow()));
 
         navigator.goTo(Screen.mainMenu);
 
         stage.setTitle("RPG 129795");
-        stage.setScene(new Scene(root, windowWidth, windowHeight));
+        Scene scene = new Scene(root, windowWidth, windowHeight);
+        scene.getStylesheets().add(getClass().getResource(styleSheet).toExternalForm());
+        stage.setScene(scene);
         stage.show();
     }
 

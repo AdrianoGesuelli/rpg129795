@@ -8,7 +8,7 @@
       fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.MainMenuController"
       alignment="CENTER" spacing="16">
 
-    <Label text="The Demon King's Castle" style="-fx-font-size: 32px;"/>
+    <Label text="The Demon King's Castle" styleClass="title"/>
     <Button text="New Game" onAction="#onNewGame" prefWidth="200"/>
     <Button fx:id="continueButton" text="Continue" onAction="#onContinue" prefWidth="200"/>
     <Button text="Quit" onAction="#onQuit" prefWidth="200"/>

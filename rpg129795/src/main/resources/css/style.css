@@ -1,0 +1,188 @@
+/* Sfondo e testo di base di tutte le schermate */
+.root {
+    -fx-background-color: #0e0c0b;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+}
+
+.label {
+    -fx-text-fill: #d8cfc0;
+}
+
+/* Titoli */
+.title {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #b8a37a;
+}
+
+.subtitle {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Bottoni, con gli stati hover, pressed e disabled */
+.button {
+    -fx-background-color: #2a1f1a;
+    -fx-text-fill: #d8cfc0;
+    -fx-border-color: #5a3d2b;
+    -fx-border-width: 1;
+    -fx-background-radius: 2;
+    -fx-border-radius: 2;
+    -fx-padding: 8 16;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #4a2a20;
+    -fx-border-color: #8b2e1f;
+}
+
+.button:pressed {
+    -fx-background-color: #6b1e14;
+}
+
+.button:disabled {
+    -fx-opacity: 0.4;
+}
+
+/* Campi di input */
+.text-field, .combo-box {
+    -fx-background-color: #1c1714;
+    -fx-text-fill: #d8cfc0;
+    -fx-prompt-text-fill: #7a6e60;
+    -fx-border-color: #5a3d2b;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #1c1714;
+    -fx-text-fill: #d8cfc0;
+}
+
+/* Registro del combattimento */
+.text-area {
+    -fx-control-inner-background: #15110f;
+    -fx-text-fill: #cfc4b2;
+    -fx-border-color: #3a2a20;
+}
+
+/* Barre degli HP */
+.progress-bar .track {
+    -fx-background-color: #2a1f1a;
+}
+
+.player-hp .bar {
+    -fx-background-color: #3f8f3f;
+}
+
+.enemy-hp .bar {
+    -fx-background-color: #a52a2a;
+}
+
+/* Testi speciali */
+.status {
+    -fx-text-fill: #9a8f7c;
+    -fx-font-style: italic;
+}
+
+.error {
+    -fx-text-fill: #c0392b;
+}
+
+.screen {
+    -fx-padding: 20;
+}
+
+/* Registro del combattimento */
+.log-scroll {
+    -fx-background: #15110f;
+    -fx-background-color: #15110f;
+    -fx-border-color: #3a2a20;
+}
+
+.log-box {
+    -fx-padding: 12;
+    -fx-spacing: 6;
+}
+
+.log-entry {
+    -fx-font-size: 17px;
+}
+
+.log-player {
+    -fx-text-fill: #6fcf6f;
+}
+
+.log-enemy {
+    -fx-text-fill: #e05a4f;
+}
+
+.log-narrator {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.log-outcome {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.log-turn {
+    -fx-text-fill: #7a6e60;
+    -fx-font-size: 14px;
+}
+
+.log-save {
+    -fx-text-fill: #8fd3ff;
+}
+
+/* Barra di scorrimento del registro */
+.log-scroll .scroll-bar:vertical {
+    -fx-background-color: #000000;
+}
+
+.log-scroll .scroll-bar .track {
+    -fx-background-color: #000000;
+    -fx-border-color: transparent;
+}
+
+.log-scroll .scroll-bar .thumb {
+    -fx-background-color: #6b4423;
+    -fx-background-radius: 4;
+}
+
+.log-scroll .scroll-bar .thumb:hover {
+    -fx-background-color: #8a5a30;
+}
+
+.log-scroll .scroll-bar .increment-button,
+.log-scroll .scroll-bar .decrement-button {
+    -fx-background-color: #000000;
+}
+
+.log-scroll .scroll-bar .increment-arrow,
+.log-scroll .scroll-bar .decrement-arrow {
+    -fx-background-color: #6b4423;
+}
+
+.log-scroll .corner {
+    -fx-background-color: #000000;
+}
+
+/* Finestra di salvataggio */
+.dialog-pane {
+    -fx-background-color: #0e0c0b;
+    -fx-border-color: #5a3d2b;
+    -fx-border-width: 1;
+}
+
+.dialog-pane > .content.label {
+    -fx-text-fill: #d8cfc0;
+    -fx-font-size: 16px;
+    -fx-padding: 20;
+}
+
+.dialog-pane > .button-bar > .container {
+    -fx-background-color: #0e0c0b;
+}

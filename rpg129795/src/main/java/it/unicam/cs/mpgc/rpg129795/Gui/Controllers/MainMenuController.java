@@ -33,7 +33,8 @@ public final class MainMenuController {
 
     @FXML
     private void onContinue() {
-        //TODO: caricare la partita quando ci sarà la schermata di combattimento
+        services.gameFlow().continueGame();
+        navigator.goTo(Screen.combat);
     }
 
     @FXML

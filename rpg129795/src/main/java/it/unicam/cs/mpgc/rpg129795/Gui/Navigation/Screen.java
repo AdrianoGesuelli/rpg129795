@@ -3,7 +3,8 @@ package it.unicam.cs.mpgc.rpg129795.Gui.Navigation;
 public enum Screen {
 
     mainMenu("/fxml/main_menu.fxml"),
-    characterCreation("/fxml/character_creation.fxml");
+    characterCreation("/fxml/character_creation.fxml"),
+    combat("/fxml/combat.fxml");
 
     private final String fxmlPath;
 
