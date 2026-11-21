@@ -52,6 +52,11 @@ public final class HowToPlayController {
         navigator.goTo(Screen.mainMenu);
     }
 
+    @FXML
+    private void onEnemies() {
+        show("How enemies work", TutorialContent.enemies());
+    }
+
     //? Mostra i blocchi della sezione, con un divisore tra uno e l'altro
     private void show(String title, List<TutorialBlock> blocks) {
         sectionTitle.setText(title);

@@ -11,5 +11,6 @@ public interface Enemy extends Combatant {
     EnemyTier getTier();
     EnemyAction chooseAction();
     List<String> getObservationHints();
+    EnemyAction chooseAttack();
 
 }

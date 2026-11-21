@@ -4,6 +4,8 @@ import it.unicam.cs.mpgc.rpg129795.Combat.EnemyTurnResult;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.ActionResult;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResult;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.HitResult;
+import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyAction;
+import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyActionType;
 
 public class CombatMessages {
 
@@ -17,7 +19,25 @@ public class CombatMessages {
     }
 
     public static String enemyTurn(String enemyName, String playerName, EnemyTurnResult result) {
-        return enemyName + " uses " + result.action().name() + ". " + describeAttack(enemyName, playerName, result.result());
+        if (result.isPreparation()) {
+            return enemyPreparation(enemyName, result.action());
+        }
+        String verb = " uses ";
+        if (result.action().type() == EnemyActionType.CURSE) {
+            verb = " unleashes ";
+        }
+        return enemyName + verb + result.action().name() + ". "
+                + describeAttack(enemyName, playerName, result.result());
+    }
+
+    //? L'analisi: stesso stile delle azioni normali
+    private static String enemyPreparation(String enemyName, EnemyAction action) {
+        return enemyName + " uses " + action.name() + ". It is preparing a precise attack!";
+    }
+
+    //? Il presentimento che precede la maledizione
+    public static String omen() {
+        return "You have a bad feeling about this...";
     }
 
     private static String describeAttack(String attacker, String target, AttackResult attack) {

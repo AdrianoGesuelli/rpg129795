@@ -20,6 +20,22 @@ public class ActiveEffects {
         active.add(type.create());
     }
 
+    public int getDamageTakenPercent() {
+        int result = 100;
+        for (int i = 0; i < active.size(); i++) {
+            result = result * active.get(i).getDamageTakenPercent() / 100;
+        }
+        return result;
+    }
+
+    public int getDamageDealtPercent() {
+        int result = 100;
+        for (int i = 0; i < active.size(); i++) {
+            result = result * active.get(i).getDamageDealtPercent() / 100;
+        }
+        return result;
+    }
+
     //? inizio turno di chi ha uno status
     public void onTurnStart(Combatant statusOwner) {
         for (int i = 0; i < active.size(); i++) {

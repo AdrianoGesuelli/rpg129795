@@ -23,6 +23,7 @@
             <Button text="Actions" onAction="#onActions" prefWidth="220"/>
             <Button text="Damage &amp; affinities" onAction="#onDamage" prefWidth="220"/>
             <Button text="Classes" onAction="#onClasses" prefWidth="220"/>
+            <Button text="How enemies work" onAction="#onEnemies" prefWidth="220"/>
         </VBox>
     </left>
 

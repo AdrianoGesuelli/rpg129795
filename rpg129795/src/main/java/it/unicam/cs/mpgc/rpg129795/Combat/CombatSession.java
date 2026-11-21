@@ -5,6 +5,7 @@ import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.ActionResult;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResolve;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResult;
 import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyAction;
+import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyActionType;
 import it.unicam.cs.mpgc.rpg129795.Enemies.Enemy;
 
 public final class CombatSession {
@@ -12,6 +13,8 @@ public final class CombatSession {
     private final PlayerCharacter player;
     private final Enemy enemy;
     private final AttackResolve attackResolve;
+    private boolean cursePending;
+    private boolean analyzed;
 
     public CombatSession(PlayerCharacter player, Enemy enemy, AttackResolve attackResolve) {
         if (player == null || enemy == null || attackResolve == null) {
@@ -44,14 +47,40 @@ public final class CombatSession {
     //? Turno del nemico:
     public EnemyTurnResult enemyTurn() {
         startTurn(enemy);
-
         if (!enemy.isAlive()) {
             return null;
         }
+        EnemyTurnResult result = actEnemy();
+        endTurn(enemy);
+        return result;
+    }
+
+    //? Prima si completa ciò che era stato preparato, poi si sceglie una nuova mossa
+    private EnemyTurnResult actEnemy() {
+        if (cursePending) {
+            cursePending = false;
+            return new EnemyTurnResult(CommonEnemyActions.CURSE, attackResolve.resolveCurse(player));
+        }
+        if (analyzed) {
+            analyzed = false;
+            return enemyAttack(enemy.chooseAttack(), AttackModifiers.ANALYZED);
+        }
 
         EnemyAction action = enemy.chooseAction();
-        AttackResult result = attackResolve.resolve(enemy, player, action.damage(), action.damageType(), action.statuses());
-        endTurn(enemy);
+        if (action.type() == EnemyActionType.CURSE) {
+            cursePending = true;
+            return EnemyTurnResult.preparing(action);
+        }
+        if (action.type() == EnemyActionType.ANALYZE) {
+            analyzed = true;
+            return EnemyTurnResult.preparing(action);
+        }
+        return enemyAttack(action, AttackModifiers.NONE);
+    }
+
+    private EnemyTurnResult enemyAttack(EnemyAction action, AttackModifiers modifiers) {
+        AttackResult result = attackResolve.resolve(enemy, player, action.damage(),
+                action.damageType(), action.statuses(), modifiers);
         return new EnemyTurnResult(action, result);
     }
 

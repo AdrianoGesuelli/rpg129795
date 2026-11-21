@@ -157,4 +157,29 @@ public final class TutorialContent {
                 + "   Evasion " + stats.evasion() + "%"
                 + "   Critical " + stats.critChance() + "%";
     }
+
+    //! Nemici e comportamenti ---------------------
+
+    public static List<TutorialBlock> enemies() {
+        return List.of(
+                new TutorialBlock("A pool of actions",
+                        "Every enemy has its own pool of actions. Each turn it draws one at random.\n"
+                                + "Every action has a weight: the higher the weight, the more often it is chosen. "
+                                + "An action with weight 4 comes up four times as often as one with weight 1."),
+                new TutorialBlock("Analyze",
+                        "Every enemy, without exception, can spend a turn analyzing you: "
+                                + "\"It is preparing a precise attack!\".\n"
+                                + "Its next attack is a normal one with +50% critical chance and +50% damage.\n"
+                                + "An enemy never analyzes twice in a row.\n"
+                                + "Tip: while defending, critical hits do not deal double damage."),
+                new TutorialBlock("Curse of the Demon Lord",
+                        "Every enemy can call upon the Demon Lord. When it does, you will have a bad feeling: "
+                                + "on its next turn the curse strikes.\n"
+                                + "It takes 25% of your maximum HP, ignoring Defense, and if it hits you also suffer:\n"
+                                + "- NECROSIS;\n"
+                                + "- VULNERABLE: +50% damage taken for 5 turns;\n"
+                                + "- WEAKENED: -50% damage dealt with your attacks for 5 turns.\n"
+                                + "Defend: you take 70% of the damage and none of the effects.\n"
+                                + "Dodge: if the curse misses, nothing happens; if it hits, it hurts even more."));
+    }
 }

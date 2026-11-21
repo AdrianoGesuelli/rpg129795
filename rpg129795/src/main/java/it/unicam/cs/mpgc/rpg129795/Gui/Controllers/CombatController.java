@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg129795.Gui.Controllers;
 import it.unicam.cs.mpgc.rpg129795.Character.PlayerCharacter;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatOutcome;
+import it.unicam.cs.mpgc.rpg129795.Combat.EnemyTurnResult;
 import it.unicam.cs.mpgc.rpg129795.Enemies.Enemy;
 import it.unicam.cs.mpgc.rpg129795.Game.GameFlow;
 import it.unicam.cs.mpgc.rpg129795.Game.TurnReport;
@@ -33,6 +34,7 @@ public final class CombatController {
     private final Navigator navigator;
     private final GameFlow gameFlow;
     private int turn = 0;
+    private static final String omenStyle = "log-omen";
 
     @FXML
     private Label floorLabel;
@@ -91,8 +93,13 @@ public final class CombatController {
         if (report.playerResult() != null) {
             log(CombatMessages.playerTurn(player.getName(), enemy.getName(), report.playerResult()), playerStyle);
         }
-        if (report.enemyResult() != null) {
-            log(CombatMessages.enemyTurn(enemy.getName(), player.getName(), report.enemyResult()), enemyStyle);
+        EnemyTurnResult enemyResult = report.enemyResult();
+        if (enemyResult != null) {
+            if (enemyResult.isCharging()) {
+                log(CombatMessages.omen(), omenStyle);
+            } else {
+                log(CombatMessages.enemyTurn(enemy.getName(), player.getName(), enemyResult), enemyStyle);
+            }
         }
         refresh();
 

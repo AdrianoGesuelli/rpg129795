@@ -216,3 +216,9 @@
     -fx-max-height: 1;
     -fx-background-color: #5a3d2b;
 }
+
+.log-omen {
+    -fx-text-fill: #d8b4fe;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}

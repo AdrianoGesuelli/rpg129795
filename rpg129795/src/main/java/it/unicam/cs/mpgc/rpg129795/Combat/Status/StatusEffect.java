@@ -15,4 +15,14 @@ public interface StatusEffect {
         return 1;
     }
 
+    //? Percentuale di danno subito mentre lo status è attivo (100 = normale)
+    default int getDamageTakenPercent() {
+        return 100;
+    }
+
+    //? Percentuale di danno inflitto (con gli attacchi diretti) mentre lo status è attivo
+    default int getDamageDealtPercent() {
+        return 100;
+    }
+
 }
