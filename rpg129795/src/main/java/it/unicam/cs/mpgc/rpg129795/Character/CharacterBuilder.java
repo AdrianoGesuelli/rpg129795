@@ -7,7 +7,7 @@ import it.unicam.cs.mpgc.rpg129795.Weapons.Weapon;
 
 public class CharacterBuilder {
 
-    private static final int maxNameLenght = 20;
+    public static final int maxNameLength = 20;
     private String name;
     private CharacterClass characterClass;
     private Subclass subclass;
@@ -16,8 +16,8 @@ public class CharacterBuilder {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");
         }
-        if (name.trim().length() > maxNameLenght) {
-            throw new IllegalArgumentException("Name cannot be longer than " + maxNameLenght + " characters");
+        if (name.trim().length() > maxNameLength) {
+            throw new IllegalArgumentException("Name cannot be longer than " + maxNameLength + " characters");
         }
         this.name = name.trim();
         return this;

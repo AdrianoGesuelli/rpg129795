@@ -26,7 +26,7 @@ public class RpgApplication extends Application {
         controllerFactory.register(MainMenuController.class,
                 () -> new MainMenuController(navigator, services));
         controllerFactory.register(CharacterCreationController.class,
-                () -> new CharacterCreationController(navigator));
+                () -> new CharacterCreationController(navigator, services.gameFlow()));
 
         navigator.goTo(Screen.mainMenu);
 

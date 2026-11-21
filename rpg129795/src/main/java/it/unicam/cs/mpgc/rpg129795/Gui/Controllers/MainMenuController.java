@@ -23,7 +23,7 @@ public final class MainMenuController {
     //? Chiamato da JavaFX appena gli elementi dell'FXML sono collegati
     @FXML
     private void initialize() {
-        continueButton.setDisable(!services.saveManager().hasSave());
+        continueButton.setDisable(!services.gameFlow().hasSave());
     }
 
     @FXML

@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.CharacterCreationController"
-      alignment="CENTER" spacing="16">
+      alignment="CENTER" spacing="12">
 
-    <Label text="Character creation (work in progress)" style="-fx-font-size: 24px;"/>
-    <Button text="Back" onAction="#onBack" prefWidth="200"/>
+    <Label text="Who dares to enter the castle?" style="-fx-font-size: 24px;"/>
+
+    <TextField fx:id="nameField" promptText="Your name" maxWidth="300"/>
+    <ComboBox fx:id="classBox" promptText="Class" onAction="#onClassSelected" prefWidth="300"/>
+    <ComboBox fx:id="subclassBox" promptText="Subclass" onAction="#onSubclassSelected" prefWidth="300"/>
+    <ComboBox fx:id="entranceBox" promptText="Entrance" onAction="#onEntranceSelected" prefWidth="300"/>
+
+    <Label fx:id="descriptionLabel" wrapText="true" maxWidth="420"/>
+    <Label fx:id="errorLabel" style="-fx-text-fill: #b33;"/>
+
+    <HBox alignment="CENTER" spacing="12">
+        <Button text="Back" onAction="#onBack" prefWidth="140"/>
+        <Button text="Enter the castle" onAction="#onStart" prefWidth="140"/>
+    </HBox>
 </VBox>
