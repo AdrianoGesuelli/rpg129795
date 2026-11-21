@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.HowToPlayController"
+            styleClass="screen">
+
+    <top>
+        <StackPane>
+            <Label text="How to play" styleClass="title"/>
+            <Button text="Main menu" onAction="#onBack" StackPane.alignment="CENTER_LEFT"/>
+        </StackPane>
+    </top>
+
+    <left>
+        <VBox spacing="10" styleClass="tutorial-menu">
+            <Button text="Actions" onAction="#onActions" prefWidth="220"/>
+            <Button text="Damage &amp; affinities" onAction="#onDamage" prefWidth="220"/>
+            <Button text="Classes" onAction="#onClasses" prefWidth="220"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10" styleClass="tutorial-page">
+            <Label fx:id="sectionTitle" styleClass="subtitle"/>
+            <ScrollPane fx:id="contentScroll" fitToWidth="true" styleClass="log-scroll" VBox.vgrow="ALWAYS">
+                <VBox fx:id="contentBox" styleClass="tutorial-box"/>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>

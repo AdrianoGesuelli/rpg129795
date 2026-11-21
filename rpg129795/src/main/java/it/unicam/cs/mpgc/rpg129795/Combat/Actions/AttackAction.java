@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg129795.Combat.Actions;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatContext;
+import it.unicam.cs.mpgc.rpg129795.Combat.DamageRange;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.ActionResult;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResult;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusApplication;
@@ -12,12 +13,12 @@ import java.util.List;
 public final class AttackAction implements CombatActions {
 
     private final String name;
-    private final int damage;
+    private final DamageRange damage;
     private final DamageType damageType;
     private final List<StatusApplication> statuses;
 
-    public AttackAction(String name, int damage, DamageType damageType, List<StatusApplication> statuses) {
-        if (name == null || damage < 0 || damageType == null || statuses == null) {
+    public AttackAction(String name, DamageRange damage, DamageType damageType, List<StatusApplication> statuses) {
+        if (name == null || damage == null || damageType == null || statuses == null) {
             throw new IllegalArgumentException("Invalid attack data");
         }
 

@@ -4,6 +4,7 @@ import it.unicam.cs.mpgc.rpg129795.Character.Stats;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.Affinity;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.AffinityTable;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
+import it.unicam.cs.mpgc.rpg129795.Combat.DamageRange;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusApplication;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusType;
 import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyAction;
@@ -23,9 +24,9 @@ public class EntryEnemies {
     }
 
     public static EnemyTemplate gargoyle() {
-        EnemyAction stoneClaw = new EnemyAction("stone_claw_id", "Stone Claw", 9, DamageType.PHYSICAL);
-        EnemyAction divingStrike = new EnemyAction("diving_strike_id", "Diving Strike", 13, DamageType.PHYSICAL);
-        EnemyAction bodyStomp = new EnemyAction("body_stomp_id",  "Body Stomp", 11, DamageType.PHYSICAL);
+        EnemyAction stoneClaw = new EnemyAction("stone_claw_id", "Stone Claw", new DamageRange(6, 11), DamageType.PHYSICAL);
+        EnemyAction divingStrike = new EnemyAction("diving_strike_id", "Diving Strike", new DamageRange(9, 16), DamageType.PHYSICAL);
+        EnemyAction bodyStomp = new EnemyAction("body_stomp_id",  "Body Stomp", new DamageRange(8, 13), DamageType.PHYSICAL);
 
         return new EnemyTemplate("gargoyle_id", "Gargoyle", EnemyTier.ENTRY,
                 new Stats(36, 10, 5, 5),
@@ -46,9 +47,9 @@ public class EntryEnemies {
     }
 
     public static EnemyTemplate giantSkeleton() {
-        EnemyAction boneClub = new EnemyAction("bone_club_id", "Bone Club", 15, DamageType.PHYSICAL);
-        EnemyAction crushingStomp = new EnemyAction("crushing_stomp_id", "Crushing Stomp", 12, DamageType.PHYSICAL);
-        EnemyAction coldBreath = new EnemyAction("cold_breath_id",  "Cold Breath", 8, DamageType.WIND,
+        EnemyAction boneClub = new EnemyAction("bone_club_id", "Bone Club", new DamageRange(11, 18), DamageType.PHYSICAL);
+        EnemyAction crushingStomp = new EnemyAction("crushing_stomp_id", "Crushing Stomp", new DamageRange(9, 15), DamageType.PHYSICAL);
+        EnemyAction coldBreath = new EnemyAction("cold_breath_id",  "Cold Breath", new DamageRange(6, 10), DamageType.WIND,
                 List.of(new StatusApplication(StatusType.NECROSIS, 30)));
 
         return new EnemyTemplate("giant_skeleton_id", "Giant Skeleton", EnemyTier.ENTRY,
@@ -70,9 +71,9 @@ public class EntryEnemies {
     }
 
     public static EnemyTemplate siren() {
-        EnemyAction tentacleSwing = new EnemyAction("tentacle_swing_id", "Tentacle Swing", 10, DamageType.PHYSICAL);
-        EnemyAction sirenSong = new EnemyAction("siren_song_id", "Siren Song", 12, DamageType.MAGIC);
-        EnemyAction bigWave = new EnemyAction("big_wave_id",  "Big Wave", 14, DamageType.WATER);
+        EnemyAction tentacleSwing = new EnemyAction("tentacle_swing_id", "Tentacle Swing", new DamageRange(7, 12), DamageType.PHYSICAL);
+        EnemyAction sirenSong = new EnemyAction("siren_song_id", "Siren Song", new DamageRange(9, 15), DamageType.MAGIC);
+        EnemyAction bigWave = new EnemyAction("big_wave_id",  "Big Wave", new DamageRange(10, 17), DamageType.WATER);
 
         return new EnemyTemplate("siren_id", "Siren", EnemyTier.ENTRY,
                 new Stats(40, 0, 25, 5),

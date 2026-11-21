@@ -186,3 +186,33 @@
 .dialog-pane > .button-bar > .container {
     -fx-background-color: #0e0c0b;
 }
+
+/* How to play */
+.tutorial-menu {
+    -fx-padding: 20 20 0 0;
+}
+
+.tutorial-page {
+    -fx-padding: 20 0 0 0;
+}
+
+.tutorial-box {
+    -fx-padding: 16;
+    -fx-spacing: 10;
+}
+
+.tutorial-heading {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #b8a37a;
+}
+
+.tutorial-text {
+    -fx-font-size: 15px;
+}
+
+.divider {
+    -fx-min-height: 1;
+    -fx-max-height: 1;
+    -fx-background-color: #5a3d2b;
+}

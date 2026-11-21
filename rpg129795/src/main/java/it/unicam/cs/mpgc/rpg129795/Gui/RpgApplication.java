@@ -1,9 +1,6 @@
 package it.unicam.cs.mpgc.rpg129795.Gui;
 
-import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.CharacterCreationController;
-import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.CombatController;
-import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.ControllerFactory;
-import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.MainMenuController;
+import it.unicam.cs.mpgc.rpg129795.Gui.Controllers.*;
 import it.unicam.cs.mpgc.rpg129795.Gui.Navigation.Navigator;
 import it.unicam.cs.mpgc.rpg129795.Gui.Navigation.SceneNavigator;
 import it.unicam.cs.mpgc.rpg129795.Gui.Navigation.Screen;
@@ -31,6 +28,8 @@ public class RpgApplication extends Application {
                 () -> new CharacterCreationController(navigator, services.gameFlow()));
         controllerFactory.register(CombatController.class,
                 () -> new CombatController(navigator, services.gameFlow()));
+        controllerFactory.register(HowToPlayController.class,
+                () -> new HowToPlayController(navigator));
 
         navigator.goTo(Screen.mainMenu);
 

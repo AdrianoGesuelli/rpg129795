@@ -4,7 +4,8 @@ public enum Screen {
 
     mainMenu("/fxml/main_menu.fxml"),
     characterCreation("/fxml/character_creation.fxml"),
-    combat("/fxml/combat.fxml");
+    combat("/fxml/combat.fxml"),
+    howToPlay("/fxml/how_to_play.fxml");
 
     private final String fxmlPath;
 

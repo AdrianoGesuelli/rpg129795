@@ -1,6 +1,7 @@
 package it.unicam.cs.mpgc.rpg129795.Weapons;
 
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
+import it.unicam.cs.mpgc.rpg129795.Combat.DamageRange;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class StartingWeapons {
     public static List<Weapon> all() {
         return List.of(
 
-                new WeaponTemplate(twin_blades_id, "Twin Blades", 12, DamageType.PHYSICAL),
-                new WeaponTemplate(greatsword_id, "Greatsword", 15, DamageType.PHYSICAL),
-                new WeaponTemplate(dagger_id, "Dagger", 8, DamageType.PHYSICAL)
+                new WeaponTemplate(twin_blades_id, "Twin Blades", new DamageRange(9, 15), DamageType.PHYSICAL),
+                new WeaponTemplate(greatsword_id, "Greatsword", new DamageRange(11, 18), DamageType.PHYSICAL),
+                new WeaponTemplate(dagger_id, "Dagger", new DamageRange(6, 10), DamageType.PHYSICAL)
 
         );
     }

@@ -11,5 +11,6 @@
     <Label text="The Demon King's Castle" styleClass="title"/>
     <Button text="New Game" onAction="#onNewGame" prefWidth="200"/>
     <Button fx:id="continueButton" text="Continue" onAction="#onContinue" prefWidth="200"/>
+    <Button text="How to play" onAction="#onHowToPlay" prefWidth="200"/>
     <Button text="Quit" onAction="#onQuit" prefWidth="200"/>
 </VBox>

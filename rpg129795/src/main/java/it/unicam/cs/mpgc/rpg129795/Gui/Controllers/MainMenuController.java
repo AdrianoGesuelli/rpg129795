@@ -38,6 +38,11 @@ public final class MainMenuController {
     }
 
     @FXML
+    private void onHowToPlay() {
+        navigator.goTo(Screen.howToPlay);
+    }
+
+    @FXML
     private void onQuit() {
         Platform.exit();
     }

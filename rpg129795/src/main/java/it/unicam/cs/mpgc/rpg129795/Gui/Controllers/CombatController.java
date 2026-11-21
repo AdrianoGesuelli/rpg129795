@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-public class CombatController {
+public final class CombatController {
 
     //? Classi di stile del registro (definite in style.css)
     private static final String logEntry = "log-entry";

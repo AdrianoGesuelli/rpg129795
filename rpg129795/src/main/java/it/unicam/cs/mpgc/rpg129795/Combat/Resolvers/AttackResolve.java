@@ -3,6 +3,7 @@ package it.unicam.cs.mpgc.rpg129795.Combat.Resolvers;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.Affinity;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
 import it.unicam.cs.mpgc.rpg129795.Combat.Combatant;
+import it.unicam.cs.mpgc.rpg129795.Combat.DamageRange;
 import it.unicam.cs.mpgc.rpg129795.Combat.Stance;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusApplication;
 
@@ -25,7 +26,7 @@ public class AttackResolve {
         this.random = random;
     }
 
-    public AttackResult resolve (Combatant attacker, Combatant target, int baseDamage,
+    public AttackResult resolve (Combatant attacker, Combatant target, DamageRange damageRange,
                                  DamageType damageType, List<StatusApplication> statuses) {
 
         HitResult outcome = hitResolve.resolve(attacker.getStats().critChance(), target);
@@ -34,6 +35,7 @@ public class AttackResolve {
             return AttackResult.missed();
         }
 
+        int baseDamage = damageRange.roll(random);
         int damage = applyStance(baseDamage, outcome, target.getStance());
 
         Affinity affinity = target.getAffinity(damageType);
