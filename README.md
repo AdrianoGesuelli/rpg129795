@@ -1,8 +1,8 @@
-# 🕯️ The Demon's King Castle
+# 🕯️ The Demon King's Castle
 
-> ⚠️ *"The Demon's King Castle" is a temporary working title and may change in future releases.*
+> ⚠️ *"The Demon King's Castle" is a temporary working title and may change in future releases.*
 
-**The Demon's King Castle** is a turn-based dark fantasy role-playing game developed in Java with a graphical user interface.
+**The Demon King's Castle** is a turn-based dark fantasy role-playing game developed in Java with a graphical user interface.
 The player guides a lone character through the depths of a cursed castle, facing brutal encounters where every choice has a cost.
 Game progress is saved to file, so a run can be resumed at any time.
 
