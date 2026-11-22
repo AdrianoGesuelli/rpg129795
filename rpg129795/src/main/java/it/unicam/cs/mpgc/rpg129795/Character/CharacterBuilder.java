@@ -2,6 +2,7 @@ package it.unicam.cs.mpgc.rpg129795.Character;
 
 import it.unicam.cs.mpgc.rpg129795.Classes.CharacterClass;
 import it.unicam.cs.mpgc.rpg129795.Classes.Subclass;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.Relic;
 import it.unicam.cs.mpgc.rpg129795.Weapons.StartingWeapons;
 import it.unicam.cs.mpgc.rpg129795.Weapons.Weapon;
 
@@ -11,6 +12,7 @@ public class CharacterBuilder {
     private String name;
     private CharacterClass characterClass;
     private Subclass subclass;
+    private Relic relic;
 
     public CharacterBuilder withName(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -48,11 +50,16 @@ public class CharacterBuilder {
         return this;
     }
 
+    public CharacterBuilder withRelic(Relic relic) {
+        this.relic = relic;
+        return this;
+    }
+
     public PlayerCharacter build() {
-        if (name == null || characterClass == null || subclass == null) {
-            throw new IllegalStateException("Name, class and subclass are required");
+        if (name == null || characterClass == null || subclass == null || relic == null) {
+            throw new IllegalStateException("Name, class, subclass and relic are required");
         }
         Weapon weapon = StartingWeapons.WeaponById(characterClass.weaponId());
-        return new PlayerCharacter(name, characterClass, subclass, weapon);
+        return new PlayerCharacter(name, characterClass, subclass, relic, weapon);
     }
 }

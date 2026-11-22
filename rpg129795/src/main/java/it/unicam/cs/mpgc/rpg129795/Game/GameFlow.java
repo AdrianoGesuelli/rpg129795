@@ -15,6 +15,7 @@ import it.unicam.cs.mpgc.rpg129795.Enemies.EnemiesFactory;
 import it.unicam.cs.mpgc.rpg129795.Enemies.Enemy;
 import it.unicam.cs.mpgc.rpg129795.Enemies.EnemyTier;
 import it.unicam.cs.mpgc.rpg129795.Enemies.RandomEnemySelector;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.Relic;
 import it.unicam.cs.mpgc.rpg129795.Saves.GameProgress;
 import it.unicam.cs.mpgc.rpg129795.Saves.SaveManager;
 
@@ -44,11 +45,13 @@ public final class GameFlow {
 
     //! Inizio partita ---------------------
 
-    public void startNewGame(String name, CharacterClass characterClass, Subclass subclass, CastleEntrance chosenEntrance) {
+    public void startNewGame(String name, CharacterClass characterClass, Subclass subclass,
+                             Relic relic, CastleEntrance chosenEntrance) {
         player = new CharacterBuilder()
                 .withName(name)
                 .withClass(characterClass)
                 .withSubclass(subclass)
+                .withRelic(relic)
                 .build();
         entrance = chosenEntrance;
         floor = entranceFloor;

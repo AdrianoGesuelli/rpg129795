@@ -6,6 +6,7 @@ import it.unicam.cs.mpgc.rpg129795.Character.PlayerCharacter;
 import it.unicam.cs.mpgc.rpg129795.Classes.CharacterClass;
 import it.unicam.cs.mpgc.rpg129795.Classes.ClassCatalog;
 import it.unicam.cs.mpgc.rpg129795.Classes.Subclass;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.RelicCatalog;
 
 public final class SaveManager {
 
@@ -20,7 +21,7 @@ public final class SaveManager {
 
     public void saveProgress(PlayerCharacter player, CastleEntrance entrance, int nextFloor) {
         storage.save(new SaveData(player.getName(), player.getCharacterClass().id(), player.getSubclass().id(),
-                player.getCurrentHp(), entrance.id(), nextFloor));
+                player.getRelic().id(), player.getCurrentHp(), entrance.id(), nextFloor));
     }
 
     public GameProgress loadProgress() {
@@ -33,6 +34,7 @@ public final class SaveManager {
                 .withName(data.playerName())
                 .withClass(characterClass)
                 .withSubclass(subclass)
+                .withRelic(RelicCatalog.byId(data.relicId()))
                 .build();
         player.setCurrentHp(data.currentHp());
 

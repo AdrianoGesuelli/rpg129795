@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg129795.Classes;
 
 import it.unicam.cs.mpgc.rpg129795.Character.StatsModifiers;
-import it.unicam.cs.mpgc.rpg129795.Classes.Abilities.SubclassWeaponAbility;
+import it.unicam.cs.mpgc.rpg129795.Classes.SubclassAbilityList.SubclassWeaponAbility;
 
 public record Subclass (String id, String name, String description, String classId,
                         StatsModifiers modifiers, SubclassWeaponAbility ability) {

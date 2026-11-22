@@ -1,6 +1,6 @@
 package it.unicam.cs.mpgc.rpg129795.Enemies;
 
-import it.unicam.cs.mpgc.rpg129795.Enemies.Catalog.EnemyBestiary;
+import it.unicam.cs.mpgc.rpg129795.Enemies.EnemyList.EnemyBestiary;
 
 import java.util.List;
 import java.util.Random;

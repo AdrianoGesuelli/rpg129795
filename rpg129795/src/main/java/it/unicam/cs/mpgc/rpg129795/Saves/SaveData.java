@@ -1,10 +1,9 @@
 package it.unicam.cs.mpgc.rpg129795.Saves;
 
-public record SaveData(String playerName, String classId, String subclassId, int currentHp, String entranceId, int floor) {
+public record SaveData(String playerName, String classId, String subclassId, String relicId, int currentHp, String entranceId, int floor) {
 
     public SaveData {
-        if (playerName == null || classId == null || subclassId == null
-                || entranceId == null || currentHp <= 0 || floor < 0) {
+        if (playerName == null || classId == null || subclassId == null || relicId == null || entranceId == null) {
             throw new IllegalArgumentException("Invalid save data");
         }
     }

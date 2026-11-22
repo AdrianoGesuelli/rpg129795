@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg129795.Combat.Actions;
+package it.unicam.cs.mpgc.rpg129795.Combat.ActionList;
 
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatContext;

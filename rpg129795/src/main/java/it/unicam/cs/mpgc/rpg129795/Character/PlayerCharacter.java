@@ -3,13 +3,14 @@ package it.unicam.cs.mpgc.rpg129795.Character;
 import it.unicam.cs.mpgc.rpg129795.Classes.CharacterClass;
 import it.unicam.cs.mpgc.rpg129795.Classes.Subclass;
 import it.unicam.cs.mpgc.rpg129795.Combat.AbstractCombatant;
-import it.unicam.cs.mpgc.rpg129795.Combat.Actions.AttackAction;
-import it.unicam.cs.mpgc.rpg129795.Combat.Actions.DefendAction;
-import it.unicam.cs.mpgc.rpg129795.Combat.Actions.DodgeAction;
-import it.unicam.cs.mpgc.rpg129795.Combat.Actions.ObserveAction;
+import it.unicam.cs.mpgc.rpg129795.Combat.ActionList.AttackAction;
+import it.unicam.cs.mpgc.rpg129795.Combat.ActionList.DefendAction;
+import it.unicam.cs.mpgc.rpg129795.Combat.ActionList.DodgeAction;
+import it.unicam.cs.mpgc.rpg129795.Combat.ActionList.ObserveAction;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.Affinity;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.Relic;
 import it.unicam.cs.mpgc.rpg129795.Weapons.Weapon;
 
 import java.util.ArrayList;
@@ -20,14 +21,17 @@ public class PlayerCharacter extends AbstractCombatant {
     private final String name;
     private final CharacterClass characterClass;
     private final Subclass subclass;
+    private final Relic relic;
     private final Weapon weapon;
     private final List<CombatActions> actions;
+    private static final int percent = 100;
 
-    PlayerCharacter(String name, CharacterClass characterClass, Subclass subclass, Weapon weapon) {
-        super(characterClass.baseStats().with(subclass.modifiers()).maxHp());
+    PlayerCharacter(String name, CharacterClass characterClass, Subclass subclass, Relic relic, Weapon weapon) {
+        super(characterClass.baseStats().with(subclass.modifiers()).maxHp() * relic.getMaxHpPercent() / percent);
         this.name = name;
         this.characterClass = characterClass;
         this.subclass = subclass;
+        this.relic = relic;
         this.weapon = weapon;
         this.actions = buildActions();
     }
@@ -47,7 +51,13 @@ public class PlayerCharacter extends AbstractCombatant {
     }
 
     public Stats getStats() {
-        return characterClass.baseStats().with(subclass.modifiers());
+        Stats base = characterClass.baseStats().with(subclass.modifiers());
+        int maxHp = base.maxHp() * relic.getMaxHpPercent() / percent;
+        int currentHp = getCurrentHp();
+        return new Stats(maxHp,
+                base.defense(),
+                base.evasion() + relic.getEvasionBonus(currentHp, maxHp),
+                base.critChance() + relic.getCritBonus(currentHp, maxHp));
     }
 
     public Affinity getAffinity(DamageType type) {
@@ -66,8 +76,29 @@ public class PlayerCharacter extends AbstractCombatant {
         return subclass;
     }
 
+    public Relic getRelic() {
+        return relic;
+    }
+
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    //! Effetti della reliquia sul combattimento ---------------------
+
+    @Override
+    public int getStanceDamageMultiplier() {
+        return relic.adjustStanceDamage(getStance(), getStance().getDamageMultiplier());
+    }
+
+    @Override
+    public int getCurseDamagePercent() {
+        return relic.getCurseDamagePercent();
+    }
+
+    @Override
+    public boolean blocksCurseEffects() {
+        return relic.blocksCurseEffects();
     }
 
     public List<CombatActions> getReadyActions() {

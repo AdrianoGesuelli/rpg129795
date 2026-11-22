@@ -1,4 +1,4 @@
-package it.unicam.cs.mpgc.rpg129795.Enemies.Catalog;
+package it.unicam.cs.mpgc.rpg129795.Enemies.EnemyList;
 
 import it.unicam.cs.mpgc.rpg129795.Enemies.EnemyTemplate;
 import it.unicam.cs.mpgc.rpg129795.Enemies.EnemyTier;

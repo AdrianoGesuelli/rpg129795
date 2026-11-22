@@ -16,6 +16,7 @@
     <TextField fx:id="nameField" promptText="Your name" maxWidth="300"/>
     <ComboBox fx:id="classBox" promptText="Class" onAction="#onClassSelected" prefWidth="300"/>
     <ComboBox fx:id="subclassBox" promptText="Subclass" onAction="#onSubclassSelected" prefWidth="300"/>
+    <ComboBox fx:id="relicBox" promptText="Relic" onAction="#onRelicSelected" prefWidth="300"/>
     <ComboBox fx:id="entranceBox" promptText="Entrance" onAction="#onEntranceSelected" prefWidth="300"/>
 
     <Label fx:id="descriptionLabel" wrapText="true" maxWidth="420"/>

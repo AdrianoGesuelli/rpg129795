@@ -5,6 +5,7 @@ import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatOutcome;
 import it.unicam.cs.mpgc.rpg129795.Combat.EnemyTurnResult;
 import it.unicam.cs.mpgc.rpg129795.Enemies.Enemy;
+import it.unicam.cs.mpgc.rpg129795.Enemies.Observable;
 import it.unicam.cs.mpgc.rpg129795.Game.GameFlow;
 import it.unicam.cs.mpgc.rpg129795.Game.TurnReport;
 import it.unicam.cs.mpgc.rpg129795.Gui.Navigation.Navigator;
@@ -12,6 +13,7 @@ import it.unicam.cs.mpgc.rpg129795.Gui.Navigation.Screen;
 import it.unicam.cs.mpgc.rpg129795.Gui.Presentation.CombatMessages;
 import it.unicam.cs.mpgc.rpg129795.Gui.Presentation.CombatantView;
 import it.unicam.cs.mpgc.rpg129795.Gui.RpgApplication;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.Relic;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -78,8 +80,18 @@ public final class CombatController {
         floorLabel.setText(floorTitle());
         gameFlow.startFight();
         log(gameFlow.getEnemy().getName() + " blocks your way.", narratorStyle);
+        revealWithRelic();
         refresh();
         showActions();
+    }
+
+    //? Watcher's Eye: la descrizione del nemico compare subito, senza spendere il turno
+    private void revealWithRelic() {
+        Relic relic = gameFlow.getPlayer().getRelic();
+        if (relic.revealsEnemies() && gameFlow.getEnemy() instanceof Observable observable) {
+            log(relic.name() + " reveals what lies before you.", narratorStyle);
+            log(observable.getObservation(), clueStyle);
+        }
     }
 
     //! Turni ---------------------

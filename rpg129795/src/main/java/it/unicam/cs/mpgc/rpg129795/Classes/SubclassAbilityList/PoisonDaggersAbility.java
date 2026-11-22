@@ -1,6 +1,6 @@
-package it.unicam.cs.mpgc.rpg129795.Classes.Abilities;
+package it.unicam.cs.mpgc.rpg129795.Classes.SubclassAbilityList;
 
-import it.unicam.cs.mpgc.rpg129795.Combat.Actions.AttackAction;
+import it.unicam.cs.mpgc.rpg129795.Combat.ActionList.AttackAction;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
 import it.unicam.cs.mpgc.rpg129795.Combat.DamageRange;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusApplication;

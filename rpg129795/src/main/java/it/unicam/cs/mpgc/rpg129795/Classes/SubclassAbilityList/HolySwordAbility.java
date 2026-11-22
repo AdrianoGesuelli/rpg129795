@@ -1,7 +1,7 @@
-package it.unicam.cs.mpgc.rpg129795.Classes.Abilities;
+package it.unicam.cs.mpgc.rpg129795.Classes.SubclassAbilityList;
 
-import it.unicam.cs.mpgc.rpg129795.Combat.Actions.AttackAction;
-import it.unicam.cs.mpgc.rpg129795.Combat.Actions.CooldownAction;
+import it.unicam.cs.mpgc.rpg129795.Combat.ActionList.AttackAction;
+import it.unicam.cs.mpgc.rpg129795.Combat.ActionList.CooldownAction;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
 import it.unicam.cs.mpgc.rpg129795.Combat.DamageRange;

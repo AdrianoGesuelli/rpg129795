@@ -18,4 +18,17 @@ public interface Combatant {
     void setStance(Stance stance);
     ActiveEffects getActiveEffects();
 
+    //? Moltiplicatore del danno subito nella postura attuale (le reliquie del giocatore possono cambiarlo)
+    default int getStanceDamageMultiplier() {
+        return getStance().getDamageMultiplier();
+    }
+
+    default int getCurseDamagePercent() {
+        return 100;
+    }
+
+    default boolean blocksCurseEffects() {
+        return false;
+    }
+
 }

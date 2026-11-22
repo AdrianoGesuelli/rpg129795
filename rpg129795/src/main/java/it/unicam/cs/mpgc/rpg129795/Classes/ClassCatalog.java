@@ -2,9 +2,9 @@ package it.unicam.cs.mpgc.rpg129795.Classes;
 
 import it.unicam.cs.mpgc.rpg129795.Character.Stats;
 import it.unicam.cs.mpgc.rpg129795.Character.StatsModifiers;
-import it.unicam.cs.mpgc.rpg129795.Classes.Abilities.HolySwordAbility;
-import it.unicam.cs.mpgc.rpg129795.Classes.Abilities.NoAbility;
-import it.unicam.cs.mpgc.rpg129795.Classes.Abilities.PoisonDaggersAbility;
+import it.unicam.cs.mpgc.rpg129795.Classes.SubclassAbilityList.HolySwordAbility;
+import it.unicam.cs.mpgc.rpg129795.Classes.SubclassAbilityList.NoAbility;
+import it.unicam.cs.mpgc.rpg129795.Classes.SubclassAbilityList.PoisonDaggersAbility;
 import it.unicam.cs.mpgc.rpg129795.Weapons.StartingWeapons;
 
 import java.util.ArrayList;

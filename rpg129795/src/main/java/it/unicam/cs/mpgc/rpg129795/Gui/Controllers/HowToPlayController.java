@@ -48,6 +48,11 @@ public final class HowToPlayController {
     }
 
     @FXML
+    private void onRelics() {
+        show("Relics", TutorialContent.relics());
+    }
+
+    @FXML
     private void onBack() {
         navigator.goTo(Screen.mainMenu);
     }

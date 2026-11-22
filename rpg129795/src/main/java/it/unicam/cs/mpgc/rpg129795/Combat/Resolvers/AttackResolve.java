@@ -48,7 +48,7 @@ public class AttackResolve {
         }
 
         int baseDamage = damageRange.roll(random) * modifiers.damagePercent() / percent;
-        int damage = applyStance(baseDamage, outcome, target.getStance());
+        int damage = applyStance(baseDamage, outcome, target);
 
         Affinity affinity = target.getAffinity(damageType);
 
@@ -76,11 +76,12 @@ public class AttackResolve {
         }
 
         int damage = target.getStats().maxHp() * curseMaxHpPercent / percent;
-        damage = damage * target.getStance().getDamageMultiplier() / percent;
+        damage = damage * target.getCurseDamagePercent() / percent;
+        damage = damage * target.getStanceDamageMultiplier() / percent;
         damage = damage * target.getActiveEffects().getDamageTakenPercent() / percent;
         target.takeDamage(damage);
 
-        if (target.getStance() != Stance.DEFENSE) {
+        if (target.getStance() != Stance.DEFENSE && !target.blocksCurseEffects()) {
             for (int i = 0; i < curseEffects.size(); i++) {
                 target.getActiveEffects().applyEffect(curseEffects.get(i));
             }
@@ -88,11 +89,13 @@ public class AttackResolve {
         return AttackResult.damaged(outcome, damage);
     }
 
-    private int applyStance(int damage, HitResult outcome, Stance stance) {
+    //? I critici usano il moltiplicatore della postura, i colpi normali quello del bersaglio
+    //? (che la sua reliquia può cambiare, es. Featherbone Charm in Dodge)
+    private int applyStance(int damage, HitResult outcome, Combatant target) {
         if (outcome == HitResult.CRITICAL) {
-            return damage * stance.getCriticalMultiplier() / percent;
+            return damage * target.getStance().getCriticalMultiplier() / percent;
         }
-        return damage * stance.getDamageMultiplier() / percent;
+        return damage * target.getStanceDamageMultiplier() / percent;
     }
 
     private int applyDefence(int damage, int defencePercent) {

@@ -8,6 +8,8 @@ import it.unicam.cs.mpgc.rpg129795.Classes.Subclass;
 import it.unicam.cs.mpgc.rpg129795.Game.GameFlow;
 import it.unicam.cs.mpgc.rpg129795.Gui.Navigation.Navigator;
 import it.unicam.cs.mpgc.rpg129795.Gui.Navigation.Screen;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.Relic;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.RelicCatalog;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,6 +23,7 @@ public final class CharacterCreationController {
     private final GameFlow gameFlow;
     private List<CharacterClass> classes;
     private List<Subclass> subclasses = List.of();
+    private List<Relic> relics;
     private List<CastleEntrance> entrances;
 
     @FXML
@@ -29,6 +32,8 @@ public final class CharacterCreationController {
     private ComboBox<String> classBox;
     @FXML
     private ComboBox<String> subclassBox;
+    @FXML
+    private ComboBox<String> relicBox;
     @FXML
     private ComboBox<String> entranceBox;
     @FXML
@@ -44,9 +49,13 @@ public final class CharacterCreationController {
     @FXML
     private void initialize() {
         classes = ClassCatalog.classes();
+        relics = RelicCatalog.relics();
         entrances = CastleEntrance.all();
         for (int i = 0; i < classes.size(); i++) {
             classBox.getItems().add(classes.get(i).name());
+        }
+        for (int i = 0; i < relics.size(); i++) {
+            relicBox.getItems().add(relics.get(i).name());
         }
         for (int i = 0; i < entrances.size(); i++) {
             entranceBox.getItems().add(entrances.get(i).name());
@@ -78,6 +87,15 @@ public final class CharacterCreationController {
     }
 
     @FXML
+    private void onRelicSelected() {
+        int index = relicBox.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            Relic relic = relics.get(index);
+            descriptionLabel.setText(relic.description() + "\n\nEffect: " + relic.effect());
+        }
+    }
+
+    @FXML
     private void onEntranceSelected() {
         int index = entranceBox.getSelectionModel().getSelectedIndex();
         if (index >= 0) {
@@ -90,18 +108,20 @@ public final class CharacterCreationController {
         String name = nameField.getText().trim();
         int classIndex = classBox.getSelectionModel().getSelectedIndex();
         int subclassIndex = subclassBox.getSelectionModel().getSelectedIndex();
+        int relicIndex = relicBox.getSelectionModel().getSelectedIndex();
         int entranceIndex = entranceBox.getSelectionModel().getSelectedIndex();
 
         if (name.isEmpty() || name.length() > CharacterBuilder.maxNameLength) {
             errorLabel.setText("Your name shall be between 1 and " + CharacterBuilder.maxNameLength + " characters.");
             return;
         }
-        if (classIndex < 0 || subclassIndex < 0 || entranceIndex < 0) {
-            errorLabel.setText("Choose a class, a subclass and an entrance.");
+        if (classIndex < 0 || subclassIndex < 0 || relicIndex < 0 || entranceIndex < 0) {
+            errorLabel.setText("Choose a class, a subclass, a relic and an entrance.");
             return;
         }
 
-        gameFlow.startNewGame(name, classes.get(classIndex), subclasses.get(subclassIndex), entrances.get(entranceIndex));
+        gameFlow.startNewGame(name, classes.get(classIndex), subclasses.get(subclassIndex),
+                relics.get(relicIndex), entrances.get(entranceIndex));
 
         navigator.goTo(Screen.combat);
     }

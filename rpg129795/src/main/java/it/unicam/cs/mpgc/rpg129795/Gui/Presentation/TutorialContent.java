@@ -7,6 +7,8 @@ import it.unicam.cs.mpgc.rpg129795.Classes.Subclass;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.Affinity;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
 import it.unicam.cs.mpgc.rpg129795.Combat.Stance;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.Relic;
+import it.unicam.cs.mpgc.rpg129795.Items.Relic.RelicCatalog;
 import it.unicam.cs.mpgc.rpg129795.Weapons.StartingWeapons;
 import it.unicam.cs.mpgc.rpg129795.Weapons.Weapon;
 
@@ -160,6 +162,22 @@ public final class TutorialContent {
                 + "   Defense " + stats.defense() + "%"
                 + "   Evasion " + stats.evasion() + "%"
                 + "   Critical " + stats.critChance() + "%";
+    }
+
+    //! Reliquie ---------------------
+
+    public static List<TutorialBlock> relics() {
+        List<TutorialBlock> blocks = new ArrayList<>();
+        blocks.add(new TutorialBlock("What relics are",
+                "Before entering the castle you choose one relic. Its power is passive: "
+                        + "it is always active and never needs to be used.\n"
+                        + "Any class and subclass can carry any relic."));
+        List<Relic> relics = RelicCatalog.relics();
+        for (int i = 0; i < relics.size(); i++) {
+            Relic relic = relics.get(i);
+            blocks.add(new TutorialBlock(relic.name(), relic.description() + "\n\nEffect: " + relic.effect()));
+        }
+        return blocks;
     }
 
     //! Nemici e comportamenti ---------------------
