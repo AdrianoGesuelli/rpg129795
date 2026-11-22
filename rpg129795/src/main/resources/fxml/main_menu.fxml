@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.MainMenuController"
+      fx:controller="it.unicam.cs.mpgc.rpg129795.gui.controllers.MainMenuController"
       alignment="CENTER" spacing="16">
 
     <Label text="The Demon King's Castle" styleClass="title"/>

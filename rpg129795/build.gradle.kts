@@ -34,5 +34,5 @@ javafx {
 }
 
 application {
-    mainClass = "it.unicam.cs.mpgc.rpg129795.Gui.RpgApplication"
+    mainClass.set("it.unicam.cs.mpgc.rpg129795.gui.RpgApplication")
 }

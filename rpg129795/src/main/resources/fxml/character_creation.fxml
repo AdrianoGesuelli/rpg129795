@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.CharacterCreationController"
+      fx:controller="it.unicam.cs.mpgc.rpg129795.gui.controllers.CharacterCreationController"
       alignment="CENTER" spacing="12">
 
     <Label text="Who dares to enter the castle?" styleClass="title"/>

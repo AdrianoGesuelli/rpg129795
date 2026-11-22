@@ -1,0 +1,133 @@
+package it.unicam.cs.mpgc.rpg129795.gui.controllers;
+
+import it.unicam.cs.mpgc.rpg129795.game.CastleEntrance;
+import it.unicam.cs.mpgc.rpg129795.character.CharacterBuilder;
+import it.unicam.cs.mpgc.rpg129795.character.classes.CharacterClass;
+import it.unicam.cs.mpgc.rpg129795.character.classes.ClassCatalog;
+import it.unicam.cs.mpgc.rpg129795.character.classes.Subclass;
+import it.unicam.cs.mpgc.rpg129795.game.GameFlow;
+import it.unicam.cs.mpgc.rpg129795.gui.navigation.Navigator;
+import it.unicam.cs.mpgc.rpg129795.gui.navigation.Screen;
+import it.unicam.cs.mpgc.rpg129795.items.relics.Relic;
+import it.unicam.cs.mpgc.rpg129795.items.relics.RelicCatalog;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+import java.util.List;
+
+public final class CharacterCreationController {
+
+    private final Navigator navigator;
+    private final GameFlow gameFlow;
+    private List<CharacterClass> classes;
+    private List<Subclass> subclasses = List.of();
+    private List<Relic> relics;
+    private List<CastleEntrance> entrances;
+
+    @FXML
+    private TextField nameField;
+    @FXML
+    private ComboBox<String> classBox;
+    @FXML
+    private ComboBox<String> subclassBox;
+    @FXML
+    private ComboBox<String> relicBox;
+    @FXML
+    private ComboBox<String> entranceBox;
+    @FXML
+    private Label descriptionLabel;
+    @FXML
+    private Label errorLabel;
+
+    public CharacterCreationController(Navigator navigator, GameFlow gameFlow) {
+        this.navigator = navigator;
+        this.gameFlow = gameFlow;
+    }
+
+    @FXML
+    private void initialize() {
+        classes = ClassCatalog.classes();
+        relics = RelicCatalog.relics();
+        entrances = CastleEntrance.all();
+        for (int i = 0; i < classes.size(); i++) {
+            classBox.getItems().add(classes.get(i).name());
+        }
+        for (int i = 0; i < relics.size(); i++) {
+            relicBox.getItems().add(relics.get(i).name());
+        }
+        for (int i = 0; i < entrances.size(); i++) {
+            entranceBox.getItems().add(entrances.get(i).name());
+        }
+    }
+
+    //? Scelta la classe, si caricano le sue sottoclassi
+    @FXML
+    private void onClassSelected() {
+        int index = classBox.getSelectionModel().getSelectedIndex();
+        if (index < 0) {
+            return;
+        }
+        CharacterClass chosen = classes.get(index);
+        subclasses = ClassCatalog.subclassesOf(chosen);
+        subclassBox.getItems().clear();
+        for (int i = 0; i < subclasses.size(); i++) {
+            subclassBox.getItems().add(subclasses.get(i).name());
+        }
+        descriptionLabel.setText(chosen.description());
+    }
+
+    @FXML
+    private void onSubclassSelected() {
+        int index = subclassBox.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            descriptionLabel.setText(subclasses.get(index).description());
+        }
+    }
+
+    @FXML
+    private void onRelicSelected() {
+        int index = relicBox.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            Relic relic = relics.get(index);
+            descriptionLabel.setText(relic.description() + "\n\nEffect: " + relic.effect());
+        }
+    }
+
+    @FXML
+    private void onEntranceSelected() {
+        int index = entranceBox.getSelectionModel().getSelectedIndex();
+        if (index >= 0) {
+            descriptionLabel.setText(entrances.get(index).description());
+        }
+    }
+
+    @FXML
+    private void onStart() {
+        String name = nameField.getText().trim();
+        int classIndex = classBox.getSelectionModel().getSelectedIndex();
+        int subclassIndex = subclassBox.getSelectionModel().getSelectedIndex();
+        int relicIndex = relicBox.getSelectionModel().getSelectedIndex();
+        int entranceIndex = entranceBox.getSelectionModel().getSelectedIndex();
+
+        if (name.isEmpty() || name.length() > CharacterBuilder.maxNameLength) {
+            errorLabel.setText("Your name shall be between 1 and " + CharacterBuilder.maxNameLength + " characters.");
+            return;
+        }
+        if (classIndex < 0 || subclassIndex < 0 || relicIndex < 0 || entranceIndex < 0) {
+            errorLabel.setText("Choose a class, a subclass, a relic and an entrance.");
+            return;
+        }
+
+        gameFlow.startNewGame(name, classes.get(classIndex), subclasses.get(subclassIndex),
+                relics.get(relicIndex), entrances.get(entranceIndex));
+
+        navigator.goTo(Screen.combat);
+    }
+
+    @FXML
+    private void onBack() {
+        navigator.goTo(Screen.mainMenu);
+    }
+}

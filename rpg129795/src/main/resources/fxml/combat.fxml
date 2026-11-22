@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.CombatController"
+      fx:controller="it.unicam.cs.mpgc.rpg129795.gui.controllers.CombatController"
       alignment="TOP_CENTER" spacing="12" styleClass="screen">
 
     <StackPane>

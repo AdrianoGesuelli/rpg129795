@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.unicam.cs.mpgc.rpg129795.Gui.Controllers.HowToPlayController"
+            fx:controller="it.unicam.cs.mpgc.rpg129795.gui.controllers.HowToPlayController"
             styleClass="screen">
 
     <top>
