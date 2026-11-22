@@ -2,7 +2,7 @@ package it.unicam.cs.mpgc.rpg129795.Combat.Status;
 
 import it.unicam.cs.mpgc.rpg129795.Combat.Combatant;
 
-public class TimedEffect implements StatusEffect{
+public abstract class TimedEffect implements StatusEffect{
 
     private final int duration;
     private int remainingTurns;

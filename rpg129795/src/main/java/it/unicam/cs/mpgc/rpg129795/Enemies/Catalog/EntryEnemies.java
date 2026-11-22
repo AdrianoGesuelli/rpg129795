@@ -41,9 +41,9 @@ public class EntryEnemies {
                 List.of(new WeightedAction(stoneClaw, 3),
                         new WeightedAction(divingStrike, 3),
                         new WeightedAction(bodyStomp, 2)),
-                List.of("Its stone body is covered in cracks, a good physical hit can deal heavy damage, but a weapon swing is not strong enough.",
-                        "There's no flesh nor bones in his body.",
-                        "Its weight seems so much that not even a storm could budge it"));
+                ("A hulking statue of cracked stone. A crushing blow of earth could split it apart, " +
+                "yet a mere weapon swing only scrapes its surface. There is no flesh nor bone within it, " +
+                "and it is so heavy that not even a storm could budge it."));
     }
 
     public static EnemyTemplate giantSkeleton() {
@@ -65,9 +65,9 @@ public class EntryEnemies {
                 List.of(new WeightedAction(boneClub, 3),
                         new WeightedAction(crushingStomp, 3),
                         new WeightedAction(coldBreath, 2)),
-                List.of("Nothing left to rot, nothing left to poison... only bones.",
-                        "Whatever holds those bones together fears the light of the old gods.",
-                        "Its body seems so frail, as if a good push can break it"));
+                ("A towering heap of ancient bones. There is nothing left to rot and nothing left to poison: " +
+                "such things only seem to feed whatever moves it. The force that binds it fears the light of the old gods, " +
+                "and its brittle frame looks ready to shatter under a good push."));
     }
 
     public static EnemyTemplate siren() {
@@ -86,9 +86,9 @@ public class EntryEnemies {
                 List.of(new WeightedAction(tentacleSwing, 2),
                         new WeightedAction(sirenSong, 4),
                         new WeightedAction(bigWave, 2)),
-                List.of("The black water seems to heal its wounds. Don't give it more.",
-                        "It appears to be covered in a fireproof liquid.",
-                        "it doesn't seems like it likes beign on dry land."));
+                ("A pale shape coiled in the black water, singing. " +
+                "The water closes its wounds, so give it no more. " +
+                "Its skin glistens with a fireproof slime, and it clearly despises being on dry land."));
     }
 
 }

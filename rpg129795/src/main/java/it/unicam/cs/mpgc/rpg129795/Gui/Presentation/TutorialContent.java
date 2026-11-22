@@ -40,7 +40,11 @@ public final class TutorialContent {
                 new TutorialBlock("Dodge", describeStance(Stance.DODGE)
                         + "\nA risky stance: you are much harder to hit, but a blow that lands hurts more."),
                 new TutorialBlock("Stances last one turn",
-                        "Defend and Dodge protect you until your next turn begins, then you return to a neutral stance."));
+                        "Defend and Dodge protect you until your next turn begins, then you return to a neutral stance."),
+                new TutorialBlock("Observe",
+                        "Spend your turn studying the enemy: you learn what it fears, what it resists "
+                                + "and what it feeds upon.\n"
+                                + "It can be used once per fight, and the enemy still acts during that turn."));
     }
 
     private static String describeStance(Stance stance) {

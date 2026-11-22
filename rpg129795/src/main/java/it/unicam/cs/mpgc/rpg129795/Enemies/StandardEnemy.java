@@ -4,6 +4,7 @@ import it.unicam.cs.mpgc.rpg129795.Character.Stats;
 import it.unicam.cs.mpgc.rpg129795.Combat.AbstractCombatant;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.Affinity;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
+import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.CommonEnemyActions;
 import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyAction;
 import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyBehavior;
 import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.WeightedAction;
@@ -11,7 +12,7 @@ import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.WeightedAction;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class StandardEnemy extends AbstractCombatant implements Enemy {
+public final class StandardEnemy extends AbstractCombatant implements Enemy, Observable {
 
     private final EnemyBehavior behavior;
     private final EnemyTemplate template;
@@ -45,8 +46,8 @@ public final class StandardEnemy extends AbstractCombatant implements Enemy {
     //? Pesca dal pool del nemico più le azioni comuni a tutti (analisi e maledizione)
     public EnemyAction chooseAction() {
         List<WeightedAction> pool = new ArrayList<>(template.actions());
-        pool.add(new WeightedAction(CommonEnemyActions.ANALYZE, CommonEnemyActions.ANALYZE_WEIGHT));
-        pool.add(new WeightedAction(CommonEnemyActions.CURSE, CommonEnemyActions.CURSE_WEIGHT));
+        pool.add(new WeightedAction(CommonEnemyActions.analyze, CommonEnemyActions.analyzeWeight));
+        pool.add(new WeightedAction(CommonEnemyActions.curse, CommonEnemyActions.curseWeight));
         return behavior.chooseAction(pool);
     }
 
@@ -55,8 +56,8 @@ public final class StandardEnemy extends AbstractCombatant implements Enemy {
         return behavior.chooseAction(template.actions());
     }
 
-    public List<String> getObservationHints() {
-        return template.observeHints();
+    public String getObservation() {
+        return template.observation();
     }
 
 }

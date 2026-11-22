@@ -40,9 +40,9 @@ public class Floor1Enemies {
                 List.of(new WeightedAction(mandibles, 4),
                         new WeightedAction(stinger, 2),
                         new WeightedAction(acidSpray, 2)),
-                List.of("Its frail wings  do not seem capable of withstanding strong gusts of wind.",
-                        "It appears saturated with its own venom.",
-                        "It keeps a safe distance from the torches that illuminate the corridor."));
+                ("A chitinous horror the size of a hound. " +
+                "Its frail wings could never withstand a strong gust of wind, its body is saturated with its own venom, " +
+                "and it keeps a safe distance from the torches that light the corridor."));
 
     }
 
@@ -63,9 +63,9 @@ public class Floor1Enemies {
                 List.of(new WeightedAction(savageSlash, 4),
                         new WeightedAction(bite, 3),
                         new WeightedAction(blindFury, 1)),
-                List.of("Lizardfolks tend to be cold-blooded creatures.",
-                        "Their scales offer great protection against physical impacts.",
-                        "The reddish color of the scales indicates that this one belongs to a tribe native to colcanic regions"));
+                ("A red-scaled lizardfolk foaming with rage. " +
+                "Like all its kind it is cold-blooded, and its thick scales offer great protection against physical blows. " +
+                "Their reddish hue marks a tribe born among volcanoes."));
     }
 
     public static EnemyTemplate darkMage() {
@@ -85,9 +85,10 @@ public class Floor1Enemies {
                 List.of(new WeightedAction(eldritchBlast, 3),
                         new WeightedAction(rottingCurse, 2),
                         new WeightedAction(darkLightning, 3)),
-                List.of("Beneath the robe there is nothing but skin and bones. Quite a fragile body.",
-                        "He has sold his soul to the darkness, and from it, he draws his power.",
-                        "He is a skilled mage, accustomed to living with magic."));
+                ("A hooded figure muttering in a forgotten tongue. " +
+                "Beneath the robe there is nothing but skin and bones: a fragile body. " +
+                "He sold his soul to the darkness and draws his power from it, " +
+                "and long years of sorcery have made him accustomed to magic."));
     }
 
     public static EnemyTemplate fleshOoze() {
@@ -108,8 +109,8 @@ public class Floor1Enemies {
                 List.of(new WeightedAction(engulf, 3),
                         new WeightedAction(putridSpray, 2),
                         new WeightedAction(boneStab, 3)),
-                List.of("The blade will probably sink in, while the flesh closes up.",
-                        "It seems to move while avoiding the hot spots in the corridor.",
-                        "It appears to be composed of - and to feed upon - rot"));
+                ("A heaving mass of rotten flesh and bone. " +
+                "A blade will sink in, only for the flesh to close up behind it. " +
+                "It moves while avoiding the hot spots in the corridor, and it seems to be made of rot, and to feed upon it."));
     }
 }

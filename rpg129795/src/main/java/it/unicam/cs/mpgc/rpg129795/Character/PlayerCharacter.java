@@ -6,6 +6,7 @@ import it.unicam.cs.mpgc.rpg129795.Combat.AbstractCombatant;
 import it.unicam.cs.mpgc.rpg129795.Combat.Actions.AttackAction;
 import it.unicam.cs.mpgc.rpg129795.Combat.Actions.DefendAction;
 import it.unicam.cs.mpgc.rpg129795.Combat.Actions.DodgeAction;
+import it.unicam.cs.mpgc.rpg129795.Combat.Actions.ObserveAction;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.Affinity;
 import it.unicam.cs.mpgc.rpg129795.Combat.Affinities.DamageType;
 import it.unicam.cs.mpgc.rpg129795.Combat.CombatActions;
@@ -37,6 +38,7 @@ public class PlayerCharacter extends AbstractCombatant {
         result.addAll(subclass.ability().createExtraActions(weapon));
         result.add(new DefendAction());
         result.add(new DodgeAction());
+        result.add(new ObserveAction());
         return List.copyOf(result);
     }
 

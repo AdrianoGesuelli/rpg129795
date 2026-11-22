@@ -26,7 +26,9 @@ public final class CombatController {
     private static final String playerStyle = "log-player";
     private static final String enemyStyle = "log-enemy";
     private static final String narratorStyle = "log-narrator";
-    private static final String outcomeStyle = "log-outcome";
+    private static final String victoryStyle = "log-victory";
+    private static final String defeatStyle = "log-defeat";
+    private static final String clueStyle = "log-clue";
     private static final String turnStyle = "log-turn";
     private static final String saveStyle = "log-save";
     private static final String separator = "────────────────────────────";
@@ -92,13 +94,17 @@ public final class CombatController {
 
         if (report.playerResult() != null) {
             log(CombatMessages.playerTurn(player.getName(), enemy.getName(), report.playerResult()), playerStyle);
+            if (report.playerResult().hasInsight()) {
+                log(report.playerResult().insight(), clueStyle);
+            }
         }
         EnemyTurnResult enemyResult = report.enemyResult();
         if (enemyResult != null) {
-            if (enemyResult.isCharging()) {
+            log(CombatMessages.enemyTurn(enemy.getName(), player.getName(), enemyResult), enemyStyle);
+            if (enemyResult.curseIncoming()) {
+                log(separator, omenStyle);
                 log(CombatMessages.omen(), omenStyle);
-            } else {
-                log(CombatMessages.enemyTurn(enemy.getName(), player.getName(), enemyResult), enemyStyle);
+                log(separator, omenStyle);
             }
         }
         refresh();
@@ -127,7 +133,7 @@ public final class CombatController {
     //! Fine combattimento ---------------------
 
     private void onVictory() {
-        log("You win! How fortuitous...", outcomeStyle);
+        log("You win! How fortuitous...", victoryStyle);
         actionBox.getChildren().clear();
         cooldownLabel.setText("");
 
@@ -146,7 +152,7 @@ public final class CombatController {
     }
 
     private void onDefeat() {
-        log("You lost! Pure skill issues! :D", outcomeStyle);
+        log("You lost! Pure skill issues! :D", defeatStyle);
         actionBox.getChildren().clear();
         cooldownLabel.setText("");
         Button menuButton = createButton("Main menu");
@@ -202,7 +208,7 @@ public final class CombatController {
         String text = "";
         for (int i = 0; i < actions.size(); i++) {
             CombatActions action = actions.get(i);
-            if (!action.isReady()) {
+            if (action.getCooldownLeft() > 0) {
                 String turns = " turns";
                 if (action.getCooldownLeft() == 1) {
                     turns = " turn";

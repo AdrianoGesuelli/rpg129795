@@ -6,6 +6,7 @@ import it.unicam.cs.mpgc.rpg129795.Combat.Combatant;
 import it.unicam.cs.mpgc.rpg129795.Combat.DamageRange;
 import it.unicam.cs.mpgc.rpg129795.Combat.Stance;
 import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusApplication;
+import it.unicam.cs.mpgc.rpg129795.Combat.Status.StatusType;
 
 import java.util.List;
 import java.util.Random;
@@ -13,29 +14,40 @@ import java.util.Random;
 public class AttackResolve {
 
     private static final int percent = 100;
+    private static final int curseMaxHpPercent = 25;
+    private static final List<StatusType> curseEffects =
+            List.of(StatusType.NECROSIS, StatusType.VULNERABLE, StatusType.WEAKENED);
 
     private final HitResolve hitResolve;
     private final Random random;
 
-    public AttackResolve (HitResolve hitResolve, Random random) {
+    public AttackResolve(HitResolve hitResolve, Random random) {
         if (hitResolve == null || random == null) {
             throw new IllegalArgumentException("Arguments cannot be null");
         }
-
         this.hitResolve = hitResolve;
         this.random = random;
     }
 
-    public AttackResult resolve (Combatant attacker, Combatant target, DamageRange damageRange,
-                                 DamageType damageType, List<StatusApplication> statuses) {
+    //? Attacco normale (usato dalle azioni del giocatore)
+    public AttackResult resolve(Combatant attacker, Combatant target, DamageRange damageRange,
+                                DamageType damageType, List<StatusApplication> statuses) {
+        return resolve(attacker, target, damageRange, damageType, statuses, AttackModifiers.none);
+    }
 
-        HitResult outcome = hitResolve.resolve(attacker.getStats().critChance(), target);
+    //? Attacco con modificatori (es. dopo un'analisi)
+    public AttackResult resolve(Combatant attacker, Combatant target, DamageRange damageRange,
+                                DamageType damageType, List<StatusApplication> statuses,
+                                AttackModifiers modifiers) {
+
+        int critChance = attacker.getStats().critChance() + modifiers.critBonus();
+        HitResult outcome = hitResolve.resolve(critChance, target);
 
         if (outcome == HitResult.MISS) {
             return AttackResult.missed();
         }
 
-        int baseDamage = damageRange.roll(random);
+        int baseDamage = damageRange.roll(random) * modifiers.damagePercent() / percent;
         int damage = applyStance(baseDamage, outcome, target.getStance());
 
         Affinity affinity = target.getAffinity(damageType);
@@ -47,8 +59,32 @@ public class AttackResolve {
 
         damage = damage * affinity.getMultiplier() / percent;
         damage = applyDefence(damage, target.getStats().defense());
+        damage = damage * attacker.getActiveEffects().getDamageDealtPercent() / percent;
+        damage = damage * target.getActiveEffects().getDamageTakenPercent() / percent;
         target.takeDamage(damage);
-        applyStatuses (target, outcome, statuses);
+        applyStatuses(target, outcome, statuses);
+        return AttackResult.damaged(outcome, damage);
+    }
+
+    //? La maledizione del Signore dei Demoni: una percentuale degli HP massimi,
+    //? ignora Difesa e affinità, non fa critico. In difesa non applica nessun effetto
+    public AttackResult resolveCurse(Combatant target) {
+        HitResult outcome = hitResolve.resolve(0, target);
+
+        if (outcome == HitResult.MISS) {
+            return AttackResult.missed();
+        }
+
+        int damage = target.getStats().maxHp() * curseMaxHpPercent / percent;
+        damage = damage * target.getStance().getDamageMultiplier() / percent;
+        damage = damage * target.getActiveEffects().getDamageTakenPercent() / percent;
+        target.takeDamage(damage);
+
+        if (target.getStance() != Stance.DEFENSE) {
+            for (int i = 0; i < curseEffects.size(); i++) {
+                target.getActiveEffects().applyEffect(curseEffects.get(i));
+            }
+        }
         return AttackResult.damaged(outcome, damage);
     }
 
@@ -77,8 +113,11 @@ public class AttackResolve {
         }
     }
 
-    //? controllo chi è immune al tipo di danno dello status, danno che non riceverà
+    //? I debuff senza tipo di danno non hanno immunità
     private boolean isImmune(Combatant target, StatusApplication status) {
+        if (!status.type().hasDamageType()) {
+            return false;
+        }
         return target.getAffinity(status.type().getDamageType()) == Affinity.IMMUNE;
     }
 
@@ -87,12 +126,10 @@ public class AttackResolve {
         if (outcome == HitResult.CRITICAL) {
             return false;
         }
-
         return roll() <= target.getStance().getStatusBlockChance();
     }
 
     private int roll() {
-        return random.nextInt(100);
+        return random.nextInt(1, percent + 1);
     }
-
 }

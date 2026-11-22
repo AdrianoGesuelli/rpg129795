@@ -122,10 +122,20 @@
     -fx-font-weight: bold;
 }
 
-.log-outcome {
-    -fx-text-fill: #ffffff;
+.log-victory {
+    -fx-text-fill: #d4af37;
     -fx-font-size: 26px;
     -fx-font-weight: bold;
+}
+
+.log-defeat {
+    -fx-text-fill: #9b1c1c;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.log-clue {
+    -fx-text-fill: #5a8fd8;
 }
 
 .log-turn {

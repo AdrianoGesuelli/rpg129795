@@ -2,8 +2,10 @@ package it.unicam.cs.mpgc.rpg129795.Combat;
 
 import it.unicam.cs.mpgc.rpg129795.Character.PlayerCharacter;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.ActionResult;
+import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackModifiers;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResolve;
 import it.unicam.cs.mpgc.rpg129795.Combat.Resolvers.AttackResult;
+import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.CommonEnemyActions;
 import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyAction;
 import it.unicam.cs.mpgc.rpg129795.Enemies.ActionsAndBehavior.EnemyActionType;
 import it.unicam.cs.mpgc.rpg129795.Enemies.Enemy;
@@ -59,23 +61,24 @@ public final class CombatSession {
     private EnemyTurnResult actEnemy() {
         if (cursePending) {
             cursePending = false;
-            return new EnemyTurnResult(CommonEnemyActions.CURSE, attackResolve.resolveCurse(player));
+            return new EnemyTurnResult(CommonEnemyActions.curse, attackResolve.resolveCurse(player));
         }
         if (analyzed) {
             analyzed = false;
-            return enemyAttack(enemy.chooseAttack(), AttackModifiers.ANALYZED);
+            return enemyAttack(enemy.chooseAttack(), AttackModifiers.analyzed);
         }
 
         EnemyAction action = enemy.chooseAction();
         if (action.type() == EnemyActionType.CURSE) {
             cursePending = true;
-            return EnemyTurnResult.preparing(action);
+            EnemyTurnResult attack = enemyAttack(enemy.chooseAttack(), AttackModifiers.none);
+            return new EnemyTurnResult(attack.action(), attack.result(), true);
         }
         if (action.type() == EnemyActionType.ANALYZE) {
             analyzed = true;
             return EnemyTurnResult.preparing(action);
         }
-        return enemyAttack(action, AttackModifiers.NONE);
+        return enemyAttack(action, AttackModifiers.none);
     }
 
     private EnemyTurnResult enemyAttack(EnemyAction action, AttackModifiers modifiers) {
